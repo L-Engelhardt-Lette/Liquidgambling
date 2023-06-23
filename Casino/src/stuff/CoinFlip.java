@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class CoinFlip{
-    private static User k = new User("Klaus","20", "passwort");
+    private static User k = new User("klaus","22","hurz");/*Zentrale.getInstance().getActiveUser();*/
     public static void main(String[] args)
     {
         //ersten Variablen
@@ -18,7 +18,7 @@ public class CoinFlip{
 
         do {
             //Wie viel willst du Wetten
-            System.out.println("How much do you wanna bet fuck off");
+            System.out.println("How much do you wanna bet bitch");
             int bet = input.nextInt();
 
             //Invalide bet
@@ -45,13 +45,13 @@ public class CoinFlip{
             if(guess.equalsIgnoreCase(coin)) //erlaubt beide ergebnisse des Coins
             {
                 k.plus(bet);
-                System.out.println("You win" + bet);
+                System.out.println("You win " + bet);
                 System.out.println("Your new Account balance" + k.getUser_Pearl());
             }
             else
             {
             k.minus(bet);
-                System.out.println("You win" + bet);
+                System.out.println("You lose " + bet);
                 System.out.println("Your new Account balance" + k.getUser_Pearl());
             }
 

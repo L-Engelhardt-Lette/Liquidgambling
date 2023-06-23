@@ -20,7 +20,7 @@ public class Persistenz {
             writer_backup = new BufferedWriter(new FileWriter("src/Datenbank/Backup.txt"));
 
             for (User user : alleUser) {
-                String temp = user.getUserName()+";"+ user.getAge()+";"+user.getPassword()+";";
+                String temp = user.getUserName()+";"+ user.getAge()+";"+user.getPassword()+";"+user.getUser_Pearl()+";"+user.getFreeSpin()+";";
                 writer.write(temp);
                 writer.newLine();
                 writer_backup.write(temp);
