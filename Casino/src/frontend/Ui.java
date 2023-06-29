@@ -20,11 +20,9 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    Persistenz p;
-
     public static void main(String[] args) {
 
-
+            //Für nick
 
 
         JFrame loginUi = new JFrame();
