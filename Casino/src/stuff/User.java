@@ -1,77 +1,53 @@
-package stuff;
+package Datenbank;
 
-import Datenbank.Persistenz;
+import stuff.User;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class User {
-    private Currency value = new Currency();
-    private String userName;
-    private String password;
-    private String age;
-    private int freeSpin;
-    private int user_Pearl;
+/* Diese Class schreibt und liest die Datenbank.txt um User updates zu machen und neue aufzuschreiben. Erstellt auch ein Backup */
 
+public class Persistenz {
 
+    public static void writing(Collection<User> alleUser) {
+        BufferedWriter writer; //schreiber für die Datenbank.txt
+        BufferedWriter writer_backup; //schreiber für die Backup.txt
+        try {
+            writer = new BufferedWriter(new FileWriter("src/Datenbank/Databank.txt")); //schreiben in datenbank.txt festlegen
+            writer_backup = new BufferedWriter(new FileWriter("src/Datenbank/Backup.txt")); // scheiben in backup.txt festlegen
 
-    public User(String userName, String age, String password) {
-
-        this.userName = userName;
-        this.age = age;
-        this.password = password;
-        user_Pearl = value.getPearl() * 1000;
-        freeSpin = value.getFreespin_value() * 10;
-
-
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public int getFreeSpin() {
-        return freeSpin;
-    }
-
-    public int getUser_Pearl() {
-        return user_Pearl;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void plus(long pearl) {
-        user_Pearl += pearl;
-    }
-
-    public boolean minus(long pearl) {
-        if (user_Pearl < 0) {
-            return false;
+            // alle User schreiben in die Datenbank.txt und überschreibt weshalb wir eine Backup.txt erstellen damit nichts verloren geht
+            for (User user : alleUser) {
+                String temp = user.getUserName()+";"+ user.getAge()+";"+user.getPassword()+";"+user.getUser_Pearl()+";"+user.getFreeSpin()+";";
+                writer.write(temp);
+                writer.newLine();
+                writer_backup.write(temp);
+                writer_backup.newLine();
+            }
+            writer.close();
+            writer_backup.close();
         }
-        user_Pearl -= pearl;
-        return true;
+        catch (FileNotFoundException fileNotFoundException) {System.out.println(102);}
+        catch (IOException io){System.out.println(103);}
     }
-
-
-    @Override
-    public String toString() {
-        return getUserName() + ", " + getPassword();
+    public static ArrayList<User> reading() {
+        ArrayList<User> ergebnis = new ArrayList<>();
+        BufferedReader reader; //leser für die Datenbank.txt
+        try {
+            reader = new BufferedReader(new FileReader("src/Datenbank/Databank.txt")); // leser in Datenbank.txt festlegen
+            String line = reader.readLine();
+            // liest die Datenbank.txt aus und gibt die user einzeln aus in einem Array gesplittet damit die 3 Daten übergeben werden können
+            while (line != null){
+                String[] split = line.split(";");
+                ergebnis.add(new User(split[0], split[1], split[2]));
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException fileNotFoundException) {System.out.println(102);}
+          catch (IOException e) {
+            e.printStackTrace();
+        }
+        // die Arraylist mit allen Usern wird zurückgegeben
+        return ergebnis;
     }
-
-
 }
-
