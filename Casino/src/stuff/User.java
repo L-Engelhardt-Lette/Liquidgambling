@@ -21,7 +21,7 @@ public class User {
         this.age = age;
         this.password = password;
         user_Pearl = value.getPearl() * 1000; //Guthabenhöhe wird gesetzt
-        freeSpin = value.getFreespin_value() * 10; //Freispiele anzahl wird gesetzt
+        freeSpin = value.getFreespin_value() + 10; //Freispiele anzahl wird gesetzt
     }
     //Return Methode für den Benutzernamen des User
     public String getUserName() {

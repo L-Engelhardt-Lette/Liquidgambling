@@ -20,26 +20,10 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    Persistenz p;
+
     public static void main(String[] args) {
-/*
-        while(true){
-            JFrame loginUi = new JFrame();
-            loginUi.setSize(400,400 );
 
-
-            //TODO: backend fragen, ob login gültig ist
-            if (name.equals("Roussel") && passwd.equals("huhu")){
-                break;
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Falsches Login");
-            }
-
-        }
-        Ui ui = new Ui();
-
-
-*/
 
 
 
@@ -87,6 +71,7 @@ public class Ui {
                 new Ui();
             }
         });
+
 
 
 
@@ -170,7 +155,10 @@ public class Ui {
         loginRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel registerPanel = new JPanel(new GridLayout(5,1));
+                JPanel registerPanel = new JPanel(new GridBagLayout());
+
+                //JPanel registerLogo = new JPanel(new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png"));
+
                 JTextField registerAlter = new JTextField("Alter");
                 registerAlter.setPreferredSize(new Dimension(400,50));
                 registerAlter.addMouseListener(new MouseAdapter() {
@@ -209,22 +197,40 @@ public class Ui {
                     }
                 });
 
-                registerPanel.add(registerUsername);
-                registerPanel.add(registerPassword);
-                registerPanel.add(registerAlter);
-                registerPanel.add(registerButton);
+                //registerPanel.add(registerLogo);
+                registerPanel.add(registerUsername,new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerPassword,new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerAlter,new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerButton,new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 Icon registerIcon256 = new ImageIcon("Casino/src/frontend/img/loginButton/register256.png");
                 registerButton.setIcon(registerIcon256);
                 registerButton.setOpaque(false);
                 registerButton.setContentAreaFilled(false);
                 registerButton.setBorderPainted(false);
-                registerPanel.add(registerBack);
+                registerPanel.add(registerBack,new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
                 registerBack.setIcon(backIcon);
                 registerBack.setOpaque(false);
                 registerBack.setContentAreaFilled(false);
                 registerBack.setBorderPainted(false);
 
+
+                registerButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ArrayList<User> reading = Persistenz.reading();
+                        User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
+                        reading.add(register_user);
+                        Persistenz.writing(reading);
+
+                        loginUi.remove(registerPanel);
+                        loginUi.add(loginMain,BorderLayout.CENTER);
+                        loginUi.revalidate();
+                        loginUi.revalidate();
+                        loginUi.repaint();
+
+                    }
+                });
 
                 loginUi.remove(loginMain);
                 loginUi.add(registerPanel, BorderLayout.CENTER);
@@ -467,6 +473,7 @@ public class Ui {
         });
 
     }
+
 
     //TODO:Background einfügen und ihn sichbar machen ohne das der andere stuff weg ist
     public static class JPanelWithBackground extends JPanel {
