@@ -1,5 +1,9 @@
 package frontend;
 
+import Datenbank.Persistenz;
+import stuff.User;
+import stuff.Zentrale;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 // Marek weiß was über java frontend
 
@@ -42,16 +47,7 @@ public class Ui {
         JPanel loginBackground = new JPanel();
         JPanel loginMain = new JPanel(new BorderLayout());
 
-
-        JTextField loginPassword = new JTextField("Password");
-        loginPassword.setPreferredSize(new Dimension(200, 30));
-        loginPassword.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                loginPassword.setText("");
-            }
-        });
-        JTextField loginUsername = new JTextField("Username");
+        JTextField loginUsername = new JTextField("LEDEAdmin");
         loginUsername.setPreferredSize(new Dimension(200, 30));
         loginUsername.addMouseListener(new MouseAdapter() {
             @Override
@@ -59,11 +55,40 @@ public class Ui {
                 loginUsername.setText("");
             }
         });
+        //TODO: Text in Textfield ändern
+        JTextField loginPassword = new JTextField("qwertz");
+        loginPassword.setPreferredSize(new Dimension(200, 30));
+        loginPassword.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loginPassword.setText("");
+            }
+        });
+
         JButton loginButton = new JButton();
         JButton loginRegister = new JButton();
         JButton loginNameLogo = new JButton();
         JPanel logintoppanel = new JPanel();
         JPanel logincenterpanel = new JPanel(new GridBagLayout());
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<User> reading = Persistenz.reading();
+                for (User user : reading) {
+                    if (user.getUserName().equals(loginUsername.getText()) && user.getPassword().equals(loginPassword.getText())) {
+                        Zentrale.getInstance().setActiveUser(user);
+                        break;
+                    }
+                }
+
+                System.out.println("Login war erfolgreich? " + Zentrale.getInstance().getActiveUser() != null);
+                loginUi.dispose();
+                new Ui();
+            }
+        });
+
+
 
 
         JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/mcbg.jpg");
@@ -170,6 +195,7 @@ public class Ui {
                         registerPassword.setText("");
                     }
                 });
+
                 JButton registerButton = new JButton();
                 JButton registerBack = new JButton();
                 registerBack.addActionListener(new ActionListener() {
@@ -389,7 +415,7 @@ public class Ui {
 
 
         //Anzeige für die Pearl Balance
-        startPearlCount.setText("12345"); //TODO: Nicht in Klammern stehen lassen
+        startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String()); //TODO: Nicht in Klammern stehen lassen
         startPearlCount.setForeground(Color.WHITE);
         startPearlCount.setHorizontalAlignment(SwingConstants.RIGHT);
         startPearlCount.setAlignmentY(Component.CENTER_ALIGNMENT);

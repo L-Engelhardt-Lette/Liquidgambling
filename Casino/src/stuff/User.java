@@ -43,6 +43,11 @@ public class User {
     public int getUser_Pearl() {
         return user_Pearl;
     }
+    //#
+    public String getUser_Pearl_String(){
+        String User_Pearl_String = Integer.toString(user_Pearl);
+        return User_Pearl_String;
+    }
     //Überschreib Methode für das Passwort des User
     public void setPassword(String password) {
         this.password = password;
