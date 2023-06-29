@@ -14,8 +14,8 @@ public class Persistenz {
         BufferedWriter writer; //schreiber für die Datenbank.txt
         BufferedWriter writer_backup; //schreiber für die Backup.txt
         try {
-            writer = new BufferedWriter(new FileWriter("src/Datenbank/Databank.txt")); //schreiben in datenbank.txt festlegen
-            writer_backup = new BufferedWriter(new FileWriter("src/Datenbank/Backup.txt")); // scheiben in backup.txt festlegen
+            writer = new BufferedWriter(new FileWriter("Casino/src/Datenbank/Databank.txt")); //schreiben in datenbank.txt festlegen
+            writer_backup = new BufferedWriter(new FileWriter("Casino/src/Datenbank/Backup.txt")); // scheiben in backup.txt festlegen
 
             // alle User schreiben in die Datenbank.txt und überschreibt weshalb wir eine Backup.txt erstellen damit nichts verloren geht
             for (User user : alleUser) {
@@ -35,7 +35,7 @@ public class Persistenz {
         ArrayList<User> ergebnis = new ArrayList<>();
         BufferedReader reader; //leser für die Datenbank.txt
         try {
-            reader = new BufferedReader(new FileReader("src/Datenbank/Databank.txt")); // leser in Datenbank.txt festlegen
+            reader = new BufferedReader(new FileReader("Casino/src/Datenbank/Databank.txt")); // leser in Datenbank.txt festlegen
             String line = reader.readLine();
             // liest die Datenbank.txt aus und gibt die user einzeln aus in einem Array gesplittet damit die 3 Daten übergeben werden können
             while (line != null){
