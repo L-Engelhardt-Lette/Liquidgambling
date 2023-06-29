@@ -8,6 +8,7 @@ public enum Wochentag {
     SAMSTAG(6),
     SONNTAG(7);
 
+
     private int position;
 
     Wochentag(int position) {
