@@ -35,7 +35,7 @@ public class Dealer {
 
     public boolean sit_down() {
         if (allPlayer.size() == 5) {
-            System.out.println("alle Spieler sind da");
+            System.out.println("alle Spieler sind da, sit down Son");
             return true;
         }
         System.out.println("nicht genug Spieler");
