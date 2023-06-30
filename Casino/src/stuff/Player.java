@@ -21,6 +21,11 @@ public class Player {
         this.name = name;
         chips = 1000;
         pot = 0;
+        your_move = false;
+    }
+
+    public void setYour_move (boolean your_move){
+        this.your_move = your_move;
     }
 
     // Methoden für das setzen der Karten
