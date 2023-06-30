@@ -1,13 +1,27 @@
 package stuff;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class Dealer {
 
+    // TODO : Den Pot an den Gewinner verteilen
+    // TODO : Eine Methode, welche bestimmt, welcher Spieler gerade an der Reihe ist.
+    // TODO : Update-Methode, wen jeder fertig ist beginnt eine neue Phase mit Enum( Flop, River, usw.).
+    // TODO : Checken der Aktion des Players
+    // TODO : Komplett Runde fertig.
+    // TODO : Karten wegnehmen Methode nach der Runde oder nach jedem Fold.
+    // TODO : Phase Karten legen.
+
     ArrayList<Player> allPlayer = new ArrayList<>();
     ArrayList<Karte> alleKarten = new ArrayList<>();
+    private int pot;
+    private int position;
 
+
+    // Methode zum Kartendeck erstellen.
     public boolean Made_C_deck() {
         for (KartenFarbe farbe : KartenFarbe.values()) {
             for (KartenWert wert : KartenWert.values()) {
@@ -28,20 +42,21 @@ public class Dealer {
         return false;
     }
 
-
-    public void spilerHiufugen(Player p) {
+    // Methode zum hinzufügen der einzelnen Spieler
+    public void spielerHinzufuegen(Player p) {
         allPlayer.add(p);
     }
 
     public boolean sit_down() {
         if (allPlayer.size() == 5) {
-            System.out.println("alle Spieler sind da, sit down Son");
+            System.out.println("alle Spieler sind da");
             return true;
         }
         System.out.println("nicht genug Spieler");
         return false;
     }
 
+    // Methode zum austeilen der Karten an die Spieler
     public boolean deal() {
 
         for (Player player : allPlayer) {
@@ -58,4 +73,57 @@ public class Dealer {
         }
         return false;
     }
+
+    // Methode für das Entfernen der Handkarten eines Spielers, falls dieser folden will
+    public void fold(Player player){
+
+        player.setKarten(null);
+        player.setKarten2(null);
+
+    }
+
+    // Methode, welche checkt, ob der Pot aller Spieler der Gleiche ist
+    private boolean checkIfPotsEqual(){
+        int firstPot = allPlayer.get(0).getPot();
+
+        for (Player player : allPlayer) {
+            int pot = player.getPot();
+            if (firstPot != pot){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void dealer_Pot(){
+
+        // erstmal checken ob alle gleich viel haben
+        if (checkIfPotsEqual() == false){
+            return;
+        }
+
+        // alle gleich viel: taschen leeren und uns geben:
+        for (Player player : allPlayer) {
+            this.pot += player.emptyPot();
+        }
+
+    }
+
+    // getter-Methode für den Pot des Dealers
+    public int getPot() {
+        return pot;
+    }
+
+    // Methode zum kicken der Spieler, wenn diese verloren haben
+    public void kick_player(){
+
+        HashSet<Player> toBeRemoved = new HashSet<>();
+        for (Player player : allPlayer) {
+            if (player.getChips() <= 0){
+                toBeRemoved.add(player);
+            }
+        }
+        allPlayer.removeAll(toBeRemoved);
+    }
+
 }
