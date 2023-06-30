@@ -14,11 +14,15 @@ public class Regelwerk {
 
     private Phasen phasen;
 
+    public void update_Phasen(Dealer dealer){
+        if (dealer.getPhasen() == Phasen.PRE_FLOP){
+            if (dealer.sit_down() == true){
+                dealer.Made_C_deck();
+                dealer.deal();
 
-    public void setPhasen(Phasen phasen){
-        this.phasen = phasen;
+            }
+        }
     }
-
 
     public static boolean istFlush(ArrayList<Karte> alleKarten){
 

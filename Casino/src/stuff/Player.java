@@ -13,7 +13,7 @@ public class Player {
     public Karte karte_2;
     private int chips;
     private int pot;
-    private boolean your_move;
+    private int your_move;
 
 
     public Player(String name) {
@@ -22,11 +22,15 @@ public class Player {
         this.name = name;
         chips = 1000;
         pot = 0;
-        your_move = false;
+        your_move = 0;
     }
 
-    public void setYour_move (boolean your_move){
+    public void setYour_move (int your_move){
         this.your_move = your_move;
+    }
+
+    public int isYour_move() {
+        return your_move;
     }
 
     // Methoden für das setzen der Karten

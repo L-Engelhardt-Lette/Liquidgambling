@@ -38,7 +38,6 @@ public class Main {
 
         Dealer dealer = new Dealer();
         dealer.Made_C_deck();
-        dealer.spielerHinzufuegen(new Player("Ich"));
         dealer.spielerHinzufuegen(new Player("Du"));
         dealer.spielerHinzufuegen(new Player("Müllers Kuh"));
         dealer.spielerHinzufuegen(new Player("Ene"));
