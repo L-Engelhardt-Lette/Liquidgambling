@@ -32,7 +32,6 @@ public class Player {
         this.karte_2 = karte;
     }
 
-
     // Der Player bietet Chips, welche von seinen Chips abgezogen werden und dem eigenen Pot hinzugefügt
     public int bet_chips(int chips){
         if (chips <= this.chips) {

@@ -1,5 +1,7 @@
 package stuff;
 
+// Enumeration für alle verschiedenen Kartenwerte (2 - 14)
+
 public enum KartenWert {
 
     ZWEI(2),
@@ -21,6 +23,8 @@ public enum KartenWert {
     KartenWert(int value){
         this.value = value;
     }
+
+    // getter-Methode für den Kartenwert, der jeder Karte zugewiesen wird
 
     public int getValue() {
         return value;
