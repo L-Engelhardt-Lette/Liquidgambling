@@ -15,6 +15,7 @@ public class Player {
     private int pot;
     private boolean your_move;
 
+
     public Player(String name) {
         karte = null;
         karte_2 = null;

@@ -11,7 +11,6 @@ public class Karte {
 
     public Karte(KartenFarbe farbe, KartenWert wert) {
 
-
         this.wert = wert;
         this.farbe = farbe;
     }

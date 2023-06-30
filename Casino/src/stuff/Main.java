@@ -43,6 +43,7 @@ public class Main {
         dealer.spielerHinzufuegen(new Player("Müllers Kuh"));
         dealer.spielerHinzufuegen(new Player("Ene"));
         dealer.spielerHinzufuegen(new Player("Mene Mu"));
+        dealer.spielerHinzufuegen(new User_player(Zentrale.getInstance().getActiveUser().getUserName()));
 
         dealer.sit_down();
         dealer.deal();
