@@ -19,6 +19,7 @@ public class Dealer {
     ArrayList<Karte> alleKarten = new ArrayList<>();
     private int pot;
     private int position;
+    private Phasen phasen;
 
 
     // Methode zum Kartendeck erstellen.
@@ -31,10 +32,7 @@ public class Dealer {
         }
         Collections.shuffle(alleKarten);
 
-/*        Karte obersteKarte = alleKarten.remove(0);
-        Karte obersteKarte2 = alleKarten.remove(0);
-        System.out.println("Gezogen: " + obersteKarte);
-        System.out.println("Gezogen: " + obersteKarte2);*/
+
         if (alleKarten.size() == 52) {
             System.out.println("alle Karten sind vorhanden");
         }
@@ -44,7 +42,10 @@ public class Dealer {
 
     // Methode zum hinzufügen der einzelnen Spieler
     public void spielerHinzufuegen(Player p) {
+        int your_move;
         allPlayer.add(p);
+        p.setYour_move(p.isYour_move() + 1);
+        your_move = p.isYour_move();
     }
 
     public boolean sit_down() {
@@ -72,6 +73,14 @@ public class Dealer {
             System.out.println(player + " hat: " + player.getKarte1() + " und " + player.getKarte_2());
         }
         return false;
+    }
+
+    public void setPhasen(Phasen phasen){
+        this.phasen = phasen;
+    }
+
+    public Phasen getPhasen(){
+        return phasen;
     }
 
     // Methode für das Entfernen der Handkarten eines Spielers, falls dieser folden will
@@ -124,6 +133,10 @@ public class Dealer {
             }
         }
         allPlayer.removeAll(toBeRemoved);
+    }
+
+    public void next_Player(){
+
     }
 
 }
