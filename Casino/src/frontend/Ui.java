@@ -1,6 +1,7 @@
 package frontend;
 
 import Datenbank.Persistenz;
+import coinflipgame.CoinFlip;
 import stuff.User;
 import stuff.Zentrale;
 
@@ -399,7 +400,6 @@ public class Ui {
         startFrame.setVisible(true);
 
         startPoker.addActionListener(e -> {
-
             JPanel pokerPanel = new JPanel();
             JButton back = new JButton("BACK");
             back.addActionListener(new ActionListener() {
@@ -418,6 +418,32 @@ public class Ui {
             startFrame.revalidate();
             startFrame.revalidate();
         });
+        startCoinflip.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CoinFlipP coinflipPanel = new CoinFlwipP();
+                JButton back = new JButton("BACK");
+                back.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        startFrame.remove(coinflipPanel);
+                        startFrame.add(startMainPanel, BorderLayout.CENTER);
+                        startFrame.revalidate();
+                        startFrame.repaint();
+                    }
+                });
+                JPanel panel = new JPanel();
+                panel.setLayout(new BorderLayout());
+                panel.add(coinflipPanel, BorderLayout.CENTER);
+                panel.add(back, BorderLayout.SOUTH);
+                startFrame.remove(startMainPanel);
+                startFrame.add(panel, BorderLayout.CENTER);
+                startFrame.revalidate();
+                startFrame.repaint();
+            }
+        });
+
+
 
     }
 
