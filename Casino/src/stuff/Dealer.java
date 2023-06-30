@@ -20,6 +20,7 @@ public class Dealer {
     private int pot;
     private int position;
     private Phasen phasen;
+    ArrayList<Karte> tableKarten = new ArrayList<>();
 
 
     // Methode zum Kartendeck erstellen.
@@ -135,8 +136,19 @@ public class Dealer {
         allPlayer.removeAll(toBeRemoved);
     }
 
-    public void next_Player(){
-
+    public void lay_Flop(){
+        int x = 3;
+        alleKarten.remove(0);
+        while (x < 3){
+            Karte flopKarten = alleKarten.remove(0);
+            tableKarten.add(flopKarten);
+            x += 1;
+        }
     }
 
+    public void lay_TnR(){
+        alleKarten.remove(0);
+        Karte tNrKarte = alleKarten.remove(0);
+        tableKarten.add(tNrKarte);
+    }
 }
