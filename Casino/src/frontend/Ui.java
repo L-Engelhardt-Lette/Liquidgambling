@@ -1,7 +1,7 @@
 package frontend;
 
 import Datenbank.Persistenz;
-import coinflipgame.CoinFlip;
+import coinflipgame.CoinFlipP;
 import stuff.User;
 import stuff.Zentrale;
 
@@ -421,7 +421,7 @@ public class Ui {
         startCoinflip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CoinFlipP coinflipPanel = new CoinFlwipP();
+                CoinFlipP coinflipPanel = new CoinFlipP();
                 JButton back = new JButton("BACK");
                 back.addActionListener(new ActionListener() {
                     @Override
@@ -432,18 +432,18 @@ public class Ui {
                         startFrame.repaint();
                     }
                 });
-                JPanel panel = new JPanel();
-                panel.setLayout(new BorderLayout());
-                panel.add(coinflipPanel, BorderLayout.CENTER);
-                panel.add(back, BorderLayout.SOUTH);
+                JPanel coinflipMainPanel = new JPanel();
+                coinflipPanel.setBackground(new Color(0,0,0,0));
+                coinflipMainPanel.setBackground(new Color(0,0,0,0));
+                coinflipMainPanel.setLayout(new BorderLayout());
+                coinflipMainPanel.add(coinflipPanel, BorderLayout.CENTER);
+                coinflipMainPanel.add(back, BorderLayout.SOUTH);
                 startFrame.remove(startMainPanel);
-                startFrame.add(panel, BorderLayout.CENTER);
+                startFrame.add(coinflipMainPanel, BorderLayout.CENTER);
                 startFrame.revalidate();
                 startFrame.repaint();
             }
         });
-
-
 
     }
 

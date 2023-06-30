@@ -15,7 +15,8 @@ public class CoinFlipP extends JPanel {
     private ImageIcon tailsIcon;
 
     public CoinFlipP() {
-        setLayout(new BorderLayout());
+        setOpaque(false); // Set the panel to be transparent
+        setLayout(new GridBagLayout());
 
         // Load images
         headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
@@ -25,9 +26,12 @@ public class CoinFlipP extends JPanel {
         coinLabel.setIcon(headsIcon);  // Set initial image
 
         JLabel balanceLabel = new JLabel("Balance: " + balance);
+        balanceLabel.setForeground(Color.WHITE); // Set text color to white
+
         JTextField betField = new JTextField();
         JButton flipButton = new JButton("Flip the Coin");
         JLabel resultLabel = new JLabel();
+        resultLabel.setForeground(Color.WHITE); // Set text color to white
 
         flipButton.addActionListener(new ActionListener() {
             @Override
@@ -80,16 +84,30 @@ public class CoinFlipP extends JPanel {
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(coinLabel);
-        panel.add(balanceLabel);
-        panel.add(betField);
-        panel.add(flipButton);
-        panel.add(resultLabel);
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false); // Set the panel to be transparent
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-        add(panel, BorderLayout.CENTER);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(coinLabel, gbc);
+
+        gbc.gridy = 1;
+        panel.add(balanceLabel, gbc);
+
+        gbc.gridy = 2;
+        panel.add(betField, gbc);
+
+        gbc.gridy = 3;
+        panel.add(flipButton, gbc);
+
+        gbc.gridy = 4;
+        panel.add(resultLabel, gbc);
+
+        add(panel);
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
     }
 
     private boolean flipCoin() {
