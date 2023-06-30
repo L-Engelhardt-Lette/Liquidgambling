@@ -429,6 +429,7 @@ public class Ui {
                         startFrame.remove(coinflipPanel);
                         startFrame.add(startMainPanel, BorderLayout.CENTER);
                         startFrame.revalidate();
+                        startFrame.revalidate();
                         startFrame.repaint();
                     }
                 });
