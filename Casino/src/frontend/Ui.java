@@ -59,27 +59,30 @@ public class Ui {
         */
 
         //Zuweisung was der Login Button macht
-        loginButton.addActionListener(e -> {
-            ArrayList<User> reading = Persistenz.reading();
-            for (User user : reading) {
-                if (user.getUserName().equals(loginUsername.getText()) && user.getPassword().equals(loginPassword.getText())) {
-                    Zentrale.getInstance().setActiveUser(user);
-                    break;
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<User> reading = Persistenz.reading();
+                for (User user : reading) {
+                    if (user.getUserName().equals(loginUsername.getText()) && user.getPassword().equals(loginPassword.getText())) {
+                        Zentrale.getInstance().setActiveUser(user);
+                        break;
+                    }
+                    //TODO: Error message wenn der user nicht richtig ist
                 }
-                //TODO: Error message wenn der user nicht richtig ist
-            }
 
-            System.out.println("Login war erfolgreich? " + Zentrale.getInstance().getActiveUser() != null);
-            loginUi.dispose();
-            new Ui();
+                System.out.println("Login war erfolgreich? " + Zentrale.getInstance().getActiveUser() != null);
+                loginUi.dispose();
+                new Ui();
+            }
         });
 
-
+/*
         //Background für die Login-Page TODO:Background muss noch richtig Implimentiert werden
         JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/mcbg.jpg");
         backgroundPanel.setLayout(new BorderLayout());
         loginUi.setContentPane(backgroundPanel);
-
+            */
 
         //Font für die Login-Page
         try {
@@ -145,92 +148,100 @@ public class Ui {
 
 
         //Erstellung der Action, wenn ein user sich Registrieren will
-        loginRegister.addActionListener(e -> {
-            JPanel registerPanel = new JPanel(new GridBagLayout());
-            //TODO:Logo bei dem Register Page einfügen
-            //JPanel registerLogo = new JPanel(new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png"));
+        loginRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel registerPanel = new JPanel(new GridBagLayout());
+                //TODO:Logo bei dem Register Page einfügen
+                //JPanel registerLogo = new JPanel(new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png"));
 
-            //Textfeld für Alter/Username/Password mit anweisung, wenn clicked ist
-            JTextField registerAlter = new JTextField("Alter");
-            registerAlter.setPreferredSize(new Dimension(400,50));
-            registerAlter.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    registerAlter.setText("");
-                }
-            });
-            JTextField registerUsername = new JTextField("Username");
-            registerUsername.setPreferredSize(new Dimension(400,50));
-            registerUsername.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    registerUsername.setText("");
-                }
-            });
-            JTextField registerPassword = new JTextField("Password");
-            registerPassword.setPreferredSize(new Dimension(400,50));
-            registerPassword.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    registerPassword.setText("");
-                }
-            });
+                //Textfeld für Alter/Username/Password mit anweisung, wenn clicked ist
+                JTextField registerAlter = new JTextField("Alter");
+                registerAlter.setPreferredSize(new Dimension(400, 50));
+                registerAlter.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        registerAlter.setText("");
+                    }
+                });
+                JTextField registerUsername = new JTextField("Username");
+                registerUsername.setPreferredSize(new Dimension(400, 50));
+                registerUsername.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        registerUsername.setText("");
+                    }
+                });
+                JTextField registerPassword = new JTextField("Password");
+                registerPassword.setPreferredSize(new Dimension(400, 50));
+                registerPassword.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        registerPassword.setText("");
+                    }
+                });
 
-            //Erstellung der Buttons für die Register Page
-            JButton registerButton = new JButton();
-            JButton registerBack = new JButton();
+                //Erstellung der Buttons für die Register Page
+                JButton registerButton = new JButton();
+                JButton registerBack = new JButton();
 
-            //Zuweisung der funktion für den Back Button auf der Register Page
-            registerBack.addActionListener(e1 -> {
-                loginUi.remove(registerPanel);
-                loginUi.add(loginMain,BorderLayout.CENTER);
+                //Zuweisung der funktion für den Back Button auf der Register Page
+                registerBack.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        loginUi.remove(registerPanel);
+                        loginUi.add(loginMain, BorderLayout.CENTER);
+                        loginUi.revalidate();
+                        loginUi.revalidate();
+                        loginUi.repaint();
+                    }
+                });
+
+
+                //registerPanel.add(registerLogo);
+                registerPanel.add(registerUsername, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerPassword, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerAlter, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                Icon registerIcon256 = new ImageIcon("Casino/src/frontend/img/loginButton/register256.png");
+                registerButton.setIcon(registerIcon256);
+                registerButton.setOpaque(false);
+                registerButton.setContentAreaFilled(false);
+                registerButton.setBorderPainted(false);
+                registerPanel.add(registerBack, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+                registerBack.setIcon(backIcon);
+                registerBack.setOpaque(false);
+                registerBack.setContentAreaFilled(false);
+                registerBack.setBorderPainted(false);
+
+
+                registerButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ArrayList<User> reading = Persistenz.reading();
+                        User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
+                        reading.add(register_user);
+                        Persistenz.writing(reading);
+
+                        loginUi.remove(registerPanel);
+                        loginUi.add(loginMain, BorderLayout.CENTER);
+                        loginUi.revalidate();
+                        loginUi.revalidate();
+                        loginUi.repaint();
+
+                    }
+                });
+
+                loginUi.remove(loginMain);
+                loginUi.add(registerPanel, BorderLayout.CENTER);
                 loginUi.revalidate();
                 loginUi.revalidate();
-                loginUi.repaint();
-            });
 
-            //registerPanel.add(registerLogo);
-            registerPanel.add(registerUsername,new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-            registerPanel.add(registerPassword,new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-            registerPanel.add(registerAlter,new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-            registerPanel.add(registerButton,new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-            Icon registerIcon256 = new ImageIcon("Casino/src/frontend/img/loginButton/register256.png");
-            registerButton.setIcon(registerIcon256);
-            registerButton.setOpaque(false);
-            registerButton.setContentAreaFilled(false);
-            registerButton.setBorderPainted(false);
-            registerPanel.add(registerBack,new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-            Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
-            registerBack.setIcon(backIcon);
-            registerBack.setOpaque(false);
-            registerBack.setContentAreaFilled(false);
-            registerBack.setBorderPainted(false);
-
-
-            registerButton.addActionListener(e12 -> {
-                ArrayList<User> reading = Persistenz.reading();
-                User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
-                reading.add(register_user);
-                Persistenz.writing(reading);
-
-                loginUi.remove(registerPanel);
-                loginUi.add(loginMain,BorderLayout.CENTER);
-                loginUi.revalidate();
-                loginUi.revalidate();
-                loginUi.repaint();
-
-            });
-
-            loginUi.remove(loginMain);
-            loginUi.add(registerPanel, BorderLayout.CENTER);
-            loginUi.revalidate();
-            loginUi.revalidate();
-
-
+            }
         });
-
-
     }
+
 
     public Ui() {
 
