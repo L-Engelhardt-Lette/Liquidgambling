@@ -15,12 +15,18 @@ public class Player {
     private int pot;
     private boolean your_move;
 
+
     public Player(String name) {
         karte = null;
         karte_2 = null;
         this.name = name;
         chips = 1000;
         pot = 0;
+        your_move = false;
+    }
+
+    public void setYour_move (boolean your_move){
+        this.your_move = your_move;
     }
 
     // Methoden für das setzen der Karten

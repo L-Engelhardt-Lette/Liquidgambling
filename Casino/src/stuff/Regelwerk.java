@@ -12,8 +12,12 @@ import java.util.ArrayList;
 
 public class Regelwerk {
 
+    private Phasen phasen;
 
 
+    public void setPhasen(Phasen phasen){
+        this.phasen = phasen;
+    }
 
 
     public static boolean istFlush(ArrayList<Karte> alleKarten){
@@ -29,6 +33,7 @@ public class Regelwerk {
         }
         return true;
     }
+
 
 
 
