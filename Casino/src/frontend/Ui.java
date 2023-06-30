@@ -62,18 +62,21 @@ public class Ui {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<User> reading = Persistenz.reading();
+                ArrayList<User> reading = Persistenz.reading(); boolean userLoginCorrect = false;
                 for (User user : reading) {
                     if (user.getUserName().equals(loginUsername.getText()) && user.getPassword().equals(loginPassword.getText())) {
                         Zentrale.getInstance().setActiveUser(user);
-                        break;
+                        userLoginCorrect = true;
                     }
-                    //TODO: Error message wenn der user nicht richtig ist
                 }
-
-                System.out.println("Login war erfolgreich? " + Zentrale.getInstance().getActiveUser() != null);
-                loginUi.dispose();
-                new Ui();
+                if (userLoginCorrect == true){
+                    System.out.println("USER LOGGED IN");
+                    loginUi.dispose();
+                    new Ui();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Flascher Username oder Passoword");
+                    System.out.println("USER LOGIN ERROR");
+                }
             }
         });
 
