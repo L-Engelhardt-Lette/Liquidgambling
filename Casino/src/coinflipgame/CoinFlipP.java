@@ -1,14 +1,17 @@
 package coinflipgame;
 
+import stuff.Zentrale;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class CoinFlipP extends JPanel {
+public class CoinFlipP extends JComponent {
 
-    private int balance = 100;
+    private int balance = Zentrale.getInstance().getActiveUser().getUser_Pearl();
+
     private Random rand = new Random();
 
     private ImageIcon headsIcon;
@@ -23,6 +26,7 @@ public class CoinFlipP extends JPanel {
         tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
 
         JLabel coinLabel = new JLabel();
+        coinLabel.setBackground(new Color(0,0,0,0));
         coinLabel.setIcon(headsIcon);  // Set initial image
 
         JLabel balanceLabel = new JLabel("Balance: " + balance);
