@@ -95,13 +95,8 @@ public class Ui {
         }
 
 
-        // Name des Projekts
-        loginNameLogo.setText("Liquid Gambling"); //TODO:Vielleicht useless
-        loginNameLogo.setForeground(Color.WHITE);
-        loginNameLogo.setOpaque(false);
-
         //Icon für den Home Button
-        Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/Logo.png");
+        Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png");
         loginNameLogo.setIcon(logoIcon);
         loginNameLogo.setOpaque(false);
         loginNameLogo.setContentAreaFilled(false);
