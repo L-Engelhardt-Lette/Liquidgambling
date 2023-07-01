@@ -176,19 +176,38 @@ public class Ui {
                 loginUi.repaint();
 
                 registerButton.addActionListener(new ActionListener() {
-                    @Override //TODO:Add ErrorCode für falsche Regestrierung
+                    @Override
                     public void actionPerformed(ActionEvent e) {
-                        ArrayList<User> reading = Persistenz.reading();
-                        User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
-                        reading.add(register_user);
-                        Persistenz.writing(reading);
-                        JOptionPane.showMessageDialog(null, "Account wurde erstellt\nViel Spaß beim Spielen");
-                        loginBackground.remove(registerMain);
-                        loginBackground.add(loginMain);
-                        loginUi.revalidate();
-                        loginUi.repaint();
+                        try {
+                            ArrayList<User> reading = Persistenz.reading();
+                            User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
+
+                            // Additional validation logic for user inputs
+                            if (register_user.getUserName().isEmpty() || register_user.getPassword().isEmpty() || register_user.getAge().isEmpty()){
+                                throw new IllegalArgumentException("Incomplete register Form");
+                            }
+                            if (!register_user.getAge().matches("\\d+")){
+                                throw new IllegalArgumentException("Your age needs to be a number");
+                            }
+
+                            reading.add(register_user);
+                            Persistenz.writing(reading);
+
+                            JOptionPane.showMessageDialog(null, "Account wurde erstellt\nViel Spaß beim Spielen");
+                            loginBackground.remove(registerMain);
+                            loginBackground.add(loginMain);
+                            loginUi.revalidate();
+                            loginUi.repaint();
+                        } catch (Exception registerDataEX) {
+                            // Handle the exception
+                            registerDataEX.printStackTrace(); // Print the stack trace for debugging purposes
+
+                            // Show an error message to the user
+                            JOptionPane.showMessageDialog(null, "Registrierung fehlgeschlagen: " + registerDataEX.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 });
+
 
                 registerBack.addActionListener(new ActionListener() {
                     @Override
@@ -372,7 +391,7 @@ public class Ui {
 
 
         //Anzeige für die Pearl Balance
-        startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String()); //TODO: Nicht in Klammern stehen lassen
+        startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
         startPearlCount.setForeground(Color.WHITE);
         startPearlCount.setHorizontalAlignment(SwingConstants.RIGHT);
         startPearlCount.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -448,8 +467,6 @@ public class Ui {
 
     }
 
-
-    //TODO:Background einfügen und ihn sichtbar machen ohne das der andere stuff weg ist
     public static class JPanelWithBackground extends JPanel {
         private BufferedImage backgroundImage;
 

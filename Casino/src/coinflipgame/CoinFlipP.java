@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class CoinFlipP extends JComponent {
+public class CoinFlipP extends JPanel {
 
     private int balance = Zentrale.getInstance().getActiveUser().getUser_Pearl();
 
@@ -112,6 +112,7 @@ public class CoinFlipP extends JComponent {
 
         add(panel);
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
     }
 
     private boolean flipCoin() {
