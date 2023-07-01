@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static javax.swing.JPanel.*;
-
 // Marek weiß was über java frontend
 
 public class Ui {
