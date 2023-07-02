@@ -51,8 +51,14 @@ public class Ui {
         });
 
         // TODO: LOGO hinzufügen
-        ImageIcon loginLogoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLabel.png");
-        loginLogoLabel.setIcon(loginLogoIcon);
+        try {
+             ImageIcon loginLogoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLabel.png");
+            loginLogoLabel.setIcon(loginLogoIcon);
+        }catch (Exception loginLogoIcon){
+            System.out.println("ERROR with Login Logo");
+        }
+
+
 
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
