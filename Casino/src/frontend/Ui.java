@@ -27,7 +27,7 @@ public class Ui {
         JFrame loginUi = new JFrame();
         JPanel loginBackground = new JPanel();
         JPanel loginMain = new JPanel(new BorderLayout());
-        JPanel loginLogoPanel = new JPanel();
+        JLabel loginLogoLabel = new JLabel();
         JPanel loginCenterPanel = new JPanel(new GridBagLayout());
         JButton loginButton = new JButton();
         JButton loginRegister = new JButton();
@@ -51,6 +51,8 @@ public class Ui {
         });
 
         // TODO: LOGO hinzufügen
+        ImageIcon loginLogoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLabel.png");
+        loginLogoLabel.setIcon(loginLogoIcon);
 
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
@@ -78,6 +80,7 @@ public class Ui {
         loginUi.setLocation(windowX, windowY);
 
         // Grid-bagLayout Einstellungen und Zuweisung der Elemente zu dem Center Panel
+        loginCenterPanel.add(loginLogoLabel, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
         loginCenterPanel.add(loginUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
         loginCenterPanel.add(loginPassword, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
         loginCenterPanel.add(loginButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
