@@ -142,10 +142,25 @@ public class Ui {
             public void actionPerformed(ActionEvent e) {
                 JPanel registerMain = new JPanel(new BorderLayout());
                 JPanel registerPanel = new JPanel(new GridBagLayout());
-                JPanel registerBackgroundPanel = new JPanel();
                 JPanel registerLogo = new JPanel();
                 JButton registerButton = new JButton();
                 JButton registerBack = new JButton();
+                JPanel registerBackgroundPanel = new JPanel(){
+                    protected void paintComponent(Graphics grphcs) {
+                        super.paintComponent(grphcs);
+                        Graphics2D g2d = (Graphics2D) grphcs;
+                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                RenderingHints.VALUE_ANTIALIAS_ON);
+
+                        // Set the gradient colors to cyan (#00d2ff) and blue (#3a7bd5)
+                        Color startColor = new Color(0, 210, 255);
+                        Color endColor = new Color(58, 123, 213);
+                        GradientPaint gp = new GradientPaint(0, 0, startColor, 0, getHeight(), endColor);
+                        g2d.setPaint(gp);
+
+                        g2d.fillRect(0, 0, getWidth(), getHeight());
+                    }
+                };
 
                 JTextField registerUsername = new JTextField("Username");
                 registerUsername.setPreferredSize(new Dimension(400, 50));
