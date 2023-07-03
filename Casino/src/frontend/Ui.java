@@ -2,6 +2,7 @@ package frontend;
 
 import  Datenbank.Persistenz;
 import coinflipgame.CoinFlipP;
+import frontend.extraUi.SettingUi;
 import stuff.User;
 import stuff.Zentrale;
 
@@ -457,6 +458,20 @@ public class Ui {
 
         //Start Frame Stuff
         startFrame.setVisible(true);
+
+        startSetting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingUi settingUi = new SettingUi();
+                settingUi.setVisible(true);
+            }
+        });
+        startSetting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         startPoker.addActionListener(e -> {
             JPanel pokerPanel = new JPanel();
