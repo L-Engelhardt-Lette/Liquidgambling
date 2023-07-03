@@ -26,7 +26,7 @@ public class Ui {
         // Erstellung von den Login Ui Elementen
         JFrame loginUi = new JFrame();
         JPanel loginMain = new JPanel(new BorderLayout());
-        JLabel loginLogoLabel = new JLabel();
+        JLabel loginLogoLabel = createLogoLabel();
         JPanel loginCenterPanel = new JPanel(new GridBagLayout());
         JButton loginButton = new JButton();
         JButton loginRegister = new JButton();
@@ -71,6 +71,9 @@ public class Ui {
         }catch (Exception loginLogoIcon){
             System.out.println("ERROR with Login Logo");
         }
+
+        //Logo einstellungen
+        loginLogoLabel.setOpaque(false);
 
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
@@ -142,7 +145,7 @@ public class Ui {
             public void actionPerformed(ActionEvent e) {
                 JPanel registerMain = new JPanel(new BorderLayout());
                 JPanel registerPanel = new JPanel(new GridBagLayout());
-                JPanel registerLogo = new JPanel();
+                JLabel registerLogo = createLogoLabel();
                 JButton registerButton = new JButton();
                 JButton registerBack = new JButton();
                 JPanel registerBackgroundPanel = new JPanel(){
@@ -161,6 +164,9 @@ public class Ui {
                         g2d.fillRect(0, 0, getWidth(), getHeight());
                     }
                 };
+
+                //Logo Einstellungen
+                registerLogo.setOpaque(false);
 
                 JTextField registerUsername = new JTextField("Username");
                 registerUsername.setPreferredSize(new Dimension(400, 50));
@@ -199,11 +205,15 @@ public class Ui {
                 registerBack.setContentAreaFilled(false);
                 registerBack.setBorderPainted(false);
 
-                registerPanel.add(registerUsername, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-                registerPanel.add(registerPassword, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-                registerPanel.add(registerAlter, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-                registerPanel.add(registerButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-                registerPanel.add(registerBack, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerLogo, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerPassword, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerAlter, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerButton, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+                registerPanel.add(registerBack, new GridBagConstraints(1, 6, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+
+                registerMain.setBackground(new Color(0,0,0,0));
+                registerPanel.setBackground(new Color(0,0,0,0));
 
                 registerBackgroundPanel.add(registerPanel);
                 registerMain.add(registerBackgroundPanel, BorderLayout.CENTER);
@@ -319,14 +329,6 @@ public class Ui {
         } catch (FontFormatException | IOException a) {
             a.printStackTrace();
         }
-
-        /*
-        Anpassung der Größe vom Programm an den Bildschirm
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = screenSize.width;
-        startFrame.setSize(screenWidth, screenHeight);
-        */
 
         JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/mcbg.jpg");
         backgroundPanel.setLayout(new BorderLayout());
@@ -528,5 +530,21 @@ public class Ui {
             super.paintComponent(g);
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
+    }
+
+    private static JLabel createLogoLabel() {
+        // Load the logo image from a local file
+        BufferedImage logoImage = null;
+        try {
+            File imageFile = new File("Casino/src/frontend/img/Logo/LogoLable.png"); // Replace with the file path of your logo image
+            logoImage = ImageIO.read(imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create a new JLabel with the logo image
+        JLabel logoLabel = new JLabel(new ImageIcon(logoImage));
+
+        return logoLabel;
     }
 }
