@@ -1,6 +1,6 @@
 package frontend;
 
-import Datenbank.Persistenz;
+import  Datenbank.Persistenz;
 import coinflipgame.CoinFlipP;
 import stuff.User;
 import stuff.Zentrale;
@@ -25,13 +25,27 @@ public class Ui {
 
         // Erstellung von den Login Ui Elementen
         JFrame loginUi = new JFrame();
-        JPanel loginBackground = new JPanel();
         JPanel loginMain = new JPanel(new BorderLayout());
         JLabel loginLogoLabel = new JLabel();
         JPanel loginCenterPanel = new JPanel(new GridBagLayout());
         JButton loginButton = new JButton();
         JButton loginRegister = new JButton();
+        JPanel loginBackground = new JPanel(){
+            protected void paintComponent(Graphics grphcs) {
+                super.paintComponent(grphcs);
+                Graphics2D g2d = (Graphics2D) grphcs;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON);
 
+                // Set the gradient colors to cyan (#00d2ff) and blue (#3a7bd5)
+                Color startColor = new Color(0, 210, 255);
+                Color endColor = new Color(58, 123, 213);
+                GradientPaint gp = new GradientPaint(0, 0, startColor, 0, getHeight(), endColor);
+                g2d.setPaint(gp);
+
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
 
         JTextField loginUsername = new JTextField("LEDEAdmin");
         loginUsername.setPreferredSize(new Dimension(200, 30));
@@ -58,8 +72,6 @@ public class Ui {
             System.out.println("ERROR with Login Logo");
         }
 
-
-
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
         loginButton.setIcon(loginicon);
@@ -84,6 +96,10 @@ public class Ui {
         int windowX = Math.max(0, (screenSize.width - windowSize.width) / 2);
         int windowY = Math.max(0, (screenSize.height - windowSize.height) / 2);
         loginUi.setLocation(windowX, windowY);
+
+        //Panel transparent machen
+        loginMain.setBackground(new Color(0,0,0,0));
+        loginCenterPanel.setBackground(new Color(0,0,0,0));
 
         // Grid-bagLayout Einstellungen und Zuweisung der Elemente zu dem Center Panel
         loginCenterPanel.add(loginLogoLabel, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
@@ -488,7 +504,7 @@ public class Ui {
             try {
                 backgroundImage = ImageIO.read(imageFile);
             } catch (IOException e) {
-
+                System.out.println("ERROR Bild wurde nicht geladen / gefunden");
             }
         }
 
