@@ -3,6 +3,7 @@ package frontend;
 import  Datenbank.Persistenz;
 import coinflipgame.CoinFlipP;
 import frontend.extraUi.SettingUi;
+import frontend.extraUi.UserUi;
 import stuff.User;
 import stuff.Zentrale;
 
@@ -268,6 +269,7 @@ public class Ui {
                     }
                 });
             }
+
         });
     }
 
@@ -292,15 +294,20 @@ public class Ui {
 
 
         // ActionListener
-        ActionListener clickToGoHome = e -> {
-
-        };
-        ActionListener openSettingUi = e -> {
-
-        };
-        ActionListener openUserUi = e -> {
-
-        };
+        startSetting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingUi settingUi = new SettingUi();
+                settingUi.setVisible(true);
+            }
+        });
+        startUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserUi userUi = new UserUi();
+                userUi.setVisible(true);
+            }
+        });
 
 
         // Sucht die Fonts für das Programm aus BIG FONT
@@ -398,6 +405,8 @@ public class Ui {
         startNameLogo.setForeground(Color.WHITE);
         startNameLogo.setOpaque(false);
 
+
+        /*  //TODO:Home Button muss noch eingefügt werden
         //Home Button
         Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/Logo.png");
         startNameLogo.addActionListener(clickToGoHome);
@@ -406,6 +415,8 @@ public class Ui {
         startNameLogo.setContentAreaFilled(false);
         startNameLogo.setBorderPainted(false);
 
+         */
+
         //Pearl Icon
         Icon pearlIcon = new ImageIcon("Casino/src/frontend/img/Logo/pearl64px.png");
         startPearlLogo.setIcon(pearlIcon);
@@ -413,7 +424,6 @@ public class Ui {
 
         //Setting Button
         Icon settingIcon = new ImageIcon("Casino/src/frontend/img/Logo/setting64px.png");
-        startSetting.addActionListener(openSettingUi);
         startSetting.setIcon(settingIcon);
         startSetting.setOpaque(false);
         startSetting.setContentAreaFilled(false);
@@ -421,7 +431,6 @@ public class Ui {
 
         //User Button
         Icon userIcon = new ImageIcon("Casino/src/frontend/img/Logo/user64px.png");
-        startUser.addActionListener(openUserUi);
         startUser.setIcon(userIcon);
         startUser.setOpaque(false);
         startUser.setContentAreaFilled(false);
@@ -459,19 +468,6 @@ public class Ui {
         //Start Frame Stuff
         startFrame.setVisible(true);
 
-        startSetting.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SettingUi settingUi = new SettingUi();
-                settingUi.setVisible(true);
-            }
-        });
-        startSetting.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         startPoker.addActionListener(e -> {
             JPanel pokerPanel = new JPanel();
