@@ -6,43 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingUi extends JOptionPane {
-    private static final int FULL_HD_WIDTH = 1920;
-    private static final int FULL_HD_HEIGHT = 1080;
-    private static final int WQHD_WIDTH = 2560;
-    private static final int WQHD_HEIGHT = 1440;
 
     private static final int MIN_VOLUME = 0;
     private static final int MAX_VOLUME = 100;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            createAndShowGUI();
-        });
-    }
 
-    private static void createAndShowGUI() {
+    public SettingUi() {
         JFrame startFrame = new JFrame("Setting UI");
-        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        startFrame.setSize(FULL_HD_WIDTH, FULL_HD_HEIGHT);
+        startFrame.setUndecorated(true);
+        startFrame.setSize(800, 600);
 
         JMenuBar menuBar = new JMenuBar();
         JMenu resolutionMenu = new JMenu("Resolution");
-
-        JMenuItem fullHdItem = new JMenuItem("Full HD");
-        fullHdItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                startFrame.setSize(FULL_HD_WIDTH, FULL_HD_HEIGHT);
-            }
-        });
-        resolutionMenu.add(fullHdItem);
-
-        JMenuItem wqhdItem = new JMenuItem("WQHD");
-        wqhdItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                startFrame.setSize(WQHD_WIDTH, WQHD_HEIGHT);
-            }
-        });
-        resolutionMenu.add(wqhdItem);
 
         JMenu creditsMenu = new JMenu("Credits");
         JMenuItem creditsItem = new JMenuItem("View Credits");
@@ -80,6 +55,7 @@ public class SettingUi extends JOptionPane {
         panel.add(volumeLabel);
         panel.add(volumeSlider);
 
+        startFrame.setLocationRelativeTo(null);
         startFrame.setContentPane(panel);
         startFrame.setVisible(true);
     }
