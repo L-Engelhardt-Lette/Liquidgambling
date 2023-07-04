@@ -21,7 +21,7 @@ public class Dealer<phasen> {
     private int position;
     //private Phasen phasen;
     ArrayList<Karte> tableKarten = new ArrayList<>();
-    public Phasen [] phasen = new Phasen[4];
+    public Phasen phasen = Phasen.PRE_FLOP;
 
     // Methode zum Kartendeck erstellen.
     public boolean Made_C_deck() {
@@ -43,10 +43,13 @@ public class Dealer<phasen> {
 
     // Methode zum hinzufügen der einzelnen Spieler
     public void spielerHinzufuegen(Player p) {
-        int your_move;
         allPlayer.add(p);
-        p.setYour_move(p.isYour_move() + 1);
-        your_move = p.isYour_move();
+        p.setYour_move(p.isYour_move());
+    }
+
+    public void user_spielerhinzufügen(User_player u){
+        allPlayer.add(u);
+        u.setYour_move(u.isYour_move() + 1);
     }
 
     public boolean sit_down() {
@@ -76,11 +79,11 @@ public class Dealer<phasen> {
         return false;
     }
 
-    public void setPhasen(Phasen[] phasen){
-        this.phasen = phasen;
+    public void setPhasen(){
+        this.phasen = phasen.getNaechstePhase();
     }
 
-    public Phasen[] getPhasen(){
+    public Phasen getPhasen(){
         return phasen;
     }
 
@@ -105,6 +108,14 @@ public class Dealer<phasen> {
         return true;
     }
 
+    public void your_turn(){
+        for (Player player : allPlayer) {
+            if(player.isYour_move() == 1){
+
+            }
+        }
+    }
+
     public void dealer_Pot(){
 
         // erstmal checken ob alle gleich viel haben
@@ -116,7 +127,6 @@ public class Dealer<phasen> {
         for (Player player : allPlayer) {
             this.pot += player.emptyPot();
         }
-
     }
 
     // getter-Methode für den Pot des Dealers

@@ -15,11 +15,27 @@ public class Regelwerk {
     private Phasen phasen;
 
     public void update_Phasen(Dealer dealer){
-        if (dealer.getPhasen()[0] == Phasen.PRE_FLOP){
+        if (dealer.getPhasen() == Phasen.PRE_FLOP){
             if (dealer.sit_down() == true){
                 dealer.Made_C_deck();
                 dealer.deal();
+                dealer.setPhasen();
             }
+        if (dealer.getPhasen() == Phasen.FLOP)    {
+            dealer.lay_Flop();
+            dealer.setPhasen();
+        }
+        if (dealer.getPhasen() == Phasen.TURN){
+            dealer.lay_TnR();
+            dealer.setPhasen();
+        }
+        if (dealer.getPhasen() == Phasen.RIVER){
+            dealer.lay_TnR();
+            dealer.setPhasen();
+        }
+        else {
+            System.out.printf("KEINE AKTIVE PHASE!!");
+        }
         }
     }
 
