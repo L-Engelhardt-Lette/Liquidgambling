@@ -212,6 +212,7 @@ public class Ui {
                 loginBackground.remove(loginMain);
                 loginBackground.add(registerMain);
                 loginUi.revalidate();
+                loginUi.revalidate();
                 loginUi.repaint();
 
                 registerButton.addActionListener(new ActionListener() {
@@ -235,6 +236,7 @@ public class Ui {
                             JOptionPane.showMessageDialog(null, "Account wurde erstellt\nViel Spaß beim Spielen");
                             loginBackground.remove(registerMain);
                             loginBackground.add(loginMain);
+                            loginUi.revalidate();
                             loginUi.revalidate();
                             loginUi.repaint();
                         } catch (Exception registerDataEX) {
@@ -435,10 +437,10 @@ public class Ui {
         startLogoNamePanel.add(startNameLogo);
 
         //Zuweisung von items zu dem TopRightPanel wie settings etc
-        startTopRightPanel.add(startPearlCount, new GridBagConstraints(1, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
-        startTopRightPanel.add(startPearlLogo, new GridBagConstraints(2, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-        startTopRightPanel.add(startSetting, new GridBagConstraints(3, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-        startTopRightPanel.add(startUser, new GridBagConstraints(4, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+        startTopRightPanel.add(startPearlCount, new GridBagConstraints(1, 1, 2, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
+        startTopRightPanel.add(startPearlLogo, new GridBagConstraints(3, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+        startTopRightPanel.add(startSetting, new GridBagConstraints(4, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+        startTopRightPanel.add(startUser, new GridBagConstraints(5, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 10), 0, 0));
 
         //Zuweisung der PanelGroups zum Programm Header (TopPanel)
         startTopPanel.add(startTopRightPanel, BorderLayout.EAST);
