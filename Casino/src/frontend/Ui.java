@@ -491,6 +491,12 @@ public class Ui {
                 startFrame.repaint();
             }
         });
+        startSlots.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
     }
 
