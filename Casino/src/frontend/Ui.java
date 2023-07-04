@@ -66,17 +66,6 @@ public class Ui {
             }
         });
 
-        // TODO: LOGO hinzufügen
-        try {
-             ImageIcon loginLogoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLabel.png");
-            loginLogoLabel.setIcon(loginLogoIcon);
-        }catch (Exception loginLogoIcon){
-            System.out.println("ERROR with Login Logo");
-        }
-
-        //Logo einstellungen
-        loginLogoLabel.setOpaque(false);
-
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
         loginButton.setIcon(loginicon);
@@ -166,9 +155,6 @@ public class Ui {
                         g2d.fillRect(0, 0, getWidth(), getHeight());
                     }
                 };
-
-                //Logo Einstellungen
-                registerLogo.setOpaque(false);
 
                 JTextField registerUsername = new JTextField("Username");
                 registerUsername.setPreferredSize(new Dimension(400, 50));
