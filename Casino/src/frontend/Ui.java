@@ -50,7 +50,7 @@ public class Ui {
         };
 
         JTextField loginUsername = new JTextField("LEDEAdmin");
-        loginUsername.setPreferredSize(new Dimension(200, 30));
+        loginUsername.setPreferredSize(new Dimension(300, 40));
         loginUsername.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -58,7 +58,7 @@ public class Ui {
             }
         });
         JTextField loginPassword = new JTextField("qwertz");
-        loginPassword.setPreferredSize(new Dimension(200, 30));
+        loginPassword.setPreferredSize(new Dimension(300, 40));
         loginPassword.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,10 +97,10 @@ public class Ui {
 
         // Grid-bagLayout Einstellungen und Zuweisung der Elemente zu dem Center Panel
         loginCenterPanel.add(loginLogoLabel, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-        loginCenterPanel.add(loginUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-        loginCenterPanel.add(loginPassword, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-        loginCenterPanel.add(loginButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-        loginCenterPanel.add(loginRegister, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+        loginCenterPanel.add(loginUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(100, 0, 0, 0), 0, 0));
+        loginCenterPanel.add(loginPassword, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
+        loginCenterPanel.add(loginButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
+        loginCenterPanel.add(loginRegister, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 0, 0), 0, 0));
 
         // Zuweisung von Hauptelementen zu dem Login Frame
         loginMain.add(loginCenterPanel, BorderLayout.CENTER);
@@ -157,7 +157,7 @@ public class Ui {
                 };
 
                 JTextField registerUsername = new JTextField("Username");
-                registerUsername.setPreferredSize(new Dimension(400, 50));
+                registerUsername.setPreferredSize(new Dimension(300, 40));
                 registerUsername.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -165,7 +165,7 @@ public class Ui {
                     }
                 });
                 JTextField registerPassword = new JTextField("Password");
-                registerPassword.setPreferredSize(new Dimension(400, 50));
+                registerPassword.setPreferredSize(new Dimension(300, 40));
                 registerPassword.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -173,7 +173,7 @@ public class Ui {
                     }
                 });
                 JTextField registerAlter = new JTextField("Alter");
-                registerAlter.setPreferredSize(new Dimension(400, 50));
+                registerAlter.setPreferredSize(new Dimension(300, 40));
                 registerAlter.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -385,23 +385,13 @@ public class Ui {
         startMainPanel.add(startSlotsPanel, new GridBagConstraints(2, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(300, -200, 0, -200), 0, 0));
         startMainPanel.add(startCoinflipPanel, new GridBagConstraints(3, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(300, -200, 0, 200), 0, 0));
 
-
-        // Name des Projekts
-        startNameLogo.setText("Liquid Gambling");
-        startNameLogo.setForeground(Color.WHITE);
-        startNameLogo.setOpaque(false);
-
-
-        /*  //TODO:Home Button muss noch eingefügt werden
         //Home Button
-        Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/Logo.png");
-        startNameLogo.addActionListener(clickToGoHome);
+        Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png");
+        //startNameLogo.addActionListener(clickToGoHome); //TODO: Home Button Actionlistener adden
         startNameLogo.setIcon(logoIcon);
         startNameLogo.setOpaque(false);
         startNameLogo.setContentAreaFilled(false);
         startNameLogo.setBorderPainted(false);
-
-         */
 
         //Pearl Icon
         Icon pearlIcon = new ImageIcon("Casino/src/frontend/img/Logo/pearl64px.png");
