@@ -18,6 +18,7 @@ public class SettingUi extends JOptionPane {
         settingUiFrame.setUndecorated(true);
         settingUiFrame.setSize(800, 600);
         JLabel volumeLabel = new JLabel("Volume");
+        volumeLabel.setForeground(Color.white);
         JPanel settingUiBackground = new JPanel(new GridBagLayout()){
             @Override
             protected void paintComponent(Graphics g) {
@@ -30,10 +31,10 @@ public class SettingUi extends JOptionPane {
             }
         };
 
-
-
-        JLabel settingUiLabel = new JLabel();
+        JLabel settingUiLabel = new JLabel("SETTINGS");
+        settingUiLabel.setForeground(Color.white);
         JLabel settingUiResolution = new JLabel("Resolution");
+        settingUiResolution.setForeground(Color.white);
         JPanel settingUiResolutionPanel = new JPanel();
         JButton settingUiFullHd = new JButton();
         JButton settingUiWqHd = new JButton();
