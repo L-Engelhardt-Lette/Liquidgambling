@@ -73,14 +73,17 @@ public class CoinFlipP extends JPanel {
                                 boolean win = flipCoin();
                                 if (win) {
                                     balance += bet;
+                                    Zentrale.getInstance().getActiveUser().plus(bet);
                                     resultLabel.setText("You won! New balance: " + balance);
                                 } else {
                                     balance -= bet;
+                                    Zentrale.getInstance().getActiveUser().minus(bet);
                                     resultLabel.setText("You lost! New balance: " + balance);
                                 }
                                 balanceLabel.setText("Balance: " + balance);
                             }
                         }
+
                     });
 
                     timer.start();
