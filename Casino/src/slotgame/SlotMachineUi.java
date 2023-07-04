@@ -53,7 +53,7 @@ public class SlotMachineUi {
 		layoutFrame();
 		layoutReels();
 		layoutOther();
-	}		
+	}
 
 	/** Creates the JFrame and Panels. */
 	private void createForm() {

@@ -2,6 +2,9 @@ package frontend.extraUi;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,11 +21,13 @@ public class UserUi extends JOptionPane {
     }
 
     private static void createAndShowGUI() {
-        JFrame startFrame = new JFrame("User Info");
-        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        startFrame.setSize(FULL_HD_WIDTH, FULL_HD_HEIGHT);
-
-        JPanel panel = new JPanel() {
+        JFrame userUiFrame = new JFrame("User Info");
+        JButton userUiBack = new JButton();
+        userUiFrame.setUndecorated(true);
+        userUiFrame.setSize(800, 600);
+        JLabel userInfoLabel = new JLabel();
+        //Chris und nick sind doofe menschen die doof sind und blöd und doof
+        JPanel backgroundpanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -34,8 +39,21 @@ public class UserUi extends JOptionPane {
             }
         };
 
-        // Load the custom font
-        Font customFont = loadCustomFont("/frontend/font/Watermelon.ttf");
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
+            Font userUiFont = font.deriveFont(25f);
+            userInfoLabel.setFont(userUiFont);
+        } catch (FontFormatException | IOException a) {
+            a.printStackTrace();
+        }
+
+
+        Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+        userUiBack.setIcon(backIcon);
+        userUiBack.setOpaque(false);
+        userUiBack.setContentAreaFilled(false);
+        userUiBack.setBorderPainted(false);
+
 
         String username = "JohnDoe";
         int age = 25;
@@ -43,16 +61,30 @@ public class UserUi extends JOptionPane {
 
         String message = "<html><b>Username:</b> " + username + "<br><b>Age:</b> " + age + "<br><b>Pearl Count:</b> " + pearlCount + "</html>";
 
-        JLabel userInfoLabel = new JLabel(message);
+        userInfoLabel.setText(message);
         userInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        userInfoLabel.setFont(customFont.deriveFont(Font.BOLD, 18));
         userInfoLabel.setForeground(Color.WHITE);
 
-        panel.setLayout(new BorderLayout());
-        panel.add(userInfoLabel, BorderLayout.CENTER);
+        userUiBack.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt) {
+                Window w = SwingUtilities.getWindowAncestor(userUiBack);
 
-        startFrame.setContentPane(panel);
-        startFrame.setVisible(true);
+                if (w != null) {
+                    w.setVisible(false);
+                }
+            }
+        });
+
+        backgroundpanel.setLayout(new GridBagLayout());
+
+        backgroundpanel.add(userInfoLabel, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(180, 0, 0, 0), 0, 0));
+
+        backgroundpanel.add(userUiBack, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(150, 0, 0, 0), 0, 0));
+
+
+        userUiFrame.setLocationRelativeTo(null);
+        userUiFrame.setContentPane(backgroundpanel);
+        userUiFrame.setVisible(true);
     }
 
     private static Font loadCustomFont(String fontFilePath) {
