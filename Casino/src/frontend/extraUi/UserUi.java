@@ -26,7 +26,7 @@ public class UserUi extends JOptionPane {
         userUiFrame.setUndecorated(true);
         userUiFrame.setSize(800, 600);
         JLabel userInfoLabel = new JLabel();
-
+        //Chris und nick sind doofe menschen die doof sind und blöd und doof
         JPanel backgroundpanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -66,14 +66,14 @@ public class UserUi extends JOptionPane {
         userInfoLabel.setForeground(Color.WHITE);
 
         userUiBack.addActionListener(new ActionListener(){
-                                         public void actionPerformed(ActionEvent evt) {
-                                             Window w = SwingUtilities.getWindowAncestor(userUiBack);
+            public void actionPerformed(ActionEvent evt) {
+                Window w = SwingUtilities.getWindowAncestor(userUiBack);
 
-                                             if (w != null) {
-                                                 w.setVisible(false);
-                                             }
-                                         }
-                                     });
+                if (w != null) {
+                    w.setVisible(false);
+                }
+            }
+        });
 
         backgroundpanel.setLayout(new GridBagLayout());
 
