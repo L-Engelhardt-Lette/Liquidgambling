@@ -1,5 +1,6 @@
 package coinflipgame;
 
+import frontend.Ui;
 import stuff.Zentrale;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public class CoinFlipP extends JPanel {
     private ImageIcon headsIcon;
     private ImageIcon tailsIcon;
 
-    public CoinFlipP() {
+    public CoinFlipP(Ui ui) {
         setOpaque(false); // Set the panel to be transparent
         setLayout(new GridBagLayout());
 
@@ -73,14 +74,19 @@ public class CoinFlipP extends JPanel {
                                 boolean win = flipCoin();
                                 if (win) {
                                     balance += bet;
+                                    Zentrale.getInstance().getActiveUser().plus(bet);
                                     resultLabel.setText("You won! New balance: " + balance);
                                 } else {
                                     balance -= bet;
+                                    Zentrale.getInstance().getActiveUser().minus(bet);
                                     resultLabel.setText("You lost! New balance: " + balance);
                                 }
                                 balanceLabel.setText("Balance: " + balance);
+                                ui.update();
                             }
+
                         }
+
                     });
 
                     timer.start();

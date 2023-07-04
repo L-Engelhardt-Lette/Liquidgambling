@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class Dealer {
+public class Dealer<phasen> {
 
     // TODO : Den Pot an den Gewinner verteilen
     // TODO : Eine Methode, welche bestimmt, welcher Spieler gerade an der Reihe ist.
@@ -19,9 +19,9 @@ public class Dealer {
     ArrayList<Karte> alleKarten = new ArrayList<>();
     private int pot;
     private int position;
-    private Phasen phasen;
+    //private Phasen phasen;
     ArrayList<Karte> tableKarten = new ArrayList<>();
-
+    public Phasen [] phasen = new Phasen[4];
 
     // Methode zum Kartendeck erstellen.
     public boolean Made_C_deck() {
@@ -76,11 +76,11 @@ public class Dealer {
         return false;
     }
 
-    public void setPhasen(Phasen phasen){
+    public void setPhasen(Phasen[] phasen){
         this.phasen = phasen;
     }
 
-    public Phasen getPhasen(){
+    public Phasen[] getPhasen(){
         return phasen;
     }
 

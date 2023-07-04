@@ -39,11 +39,16 @@ public class LoginUI {
                 for (User user : reading) {
                     if (user.getUserName().equals(username.getText()) && user.getPassword().equals(password.getText())) {
                         Zentrale.getInstance().setActiveUser(user);
-                        break;
+                        JOptionPane.showMessageDialog(null,"Done");
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Error");
                     }
                 }
 
-                System.out.println("Login war erfolgreich? " + Zentrale.getInstance().getActiveUser() != null);
+
+
 
             }
         });
