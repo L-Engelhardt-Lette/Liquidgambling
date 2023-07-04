@@ -23,6 +23,8 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    private final JLabel startPearlCount;
+
     public static void main(String[] args) {
 
         // Erstellung von den Login Ui Elementen
@@ -275,7 +277,12 @@ public class Ui {
         JLabel startCoinflipLable = new JLabel();
         JLabel startPokerLable = new JLabel();
         JLabel startSlotsLable = new JLabel();
-        JLabel startPearlCount = new JLabel();
+        startPearlCount = new JLabel() {
+            @Override
+            public String getText() {
+                return Zentrale.getInstance().getActiveUser().getUser_Pearl_String();
+            }
+        };
         JLabel startPearlLogo = new JLabel();
         JButton startUser = new JButton();
 
@@ -418,7 +425,6 @@ public class Ui {
 
 
         //Anzeige für die Pearl Balance
-        startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
         startPearlCount.setForeground(Color.WHITE);
         startPearlCount.setHorizontalAlignment(SwingConstants.RIGHT);
         startPearlCount.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -468,19 +474,19 @@ public class Ui {
         startCoinflip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CoinFlipP coinflipPanel = new CoinFlipP();
+                CoinFlipP coinflipPanel = new CoinFlipP(Ui.this);
                 JButton back = new JButton("BACK");
+                JPanel coinflipMainPanel = new JPanel();
                 back.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        startFrame.remove(coinflipPanel);
+                        startFrame.remove(coinflipMainPanel);
                         startFrame.add(startMainPanel, BorderLayout.CENTER);
                         startFrame.revalidate();
                         startFrame.revalidate();
                         startFrame.repaint();
                     }
                 });
-                JPanel coinflipMainPanel = new JPanel();
                 coinflipPanel.setBackground(new Color(0,0,0,0));
                 coinflipMainPanel.setBackground(new Color(0,0,0,0));
                 coinflipMainPanel.setLayout(new BorderLayout());
@@ -492,6 +498,11 @@ public class Ui {
                 startFrame.repaint();
             }
         });
+
+    }
+
+    public void update() {
+        startPearlCount.repaint();
 
     }
 
