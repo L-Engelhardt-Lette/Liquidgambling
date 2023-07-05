@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// Marek weiß was über java frontend
+// Marek weiß gar nichts über java frontend
 
 public class Ui {
 

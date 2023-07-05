@@ -1,6 +1,5 @@
 package stuff;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,6 +21,7 @@ public class Dealer<phasen> {
     //private Phasen phasen;
     ArrayList<Karte> tableKarten = new ArrayList<>();
     public Phasen phasen = Phasen.PRE_FLOP;
+    ArrayList<Karte> hNtCards = new ArrayList<>();
 
     // Methode zum Kartendeck erstellen.
     public boolean Made_C_deck() {
@@ -108,12 +108,16 @@ public class Dealer<phasen> {
         return true;
     }
 
-    public void your_turn(){
+    public boolean your_turn(){
         for (Player player : allPlayer) {
             if(player.isYour_move() == 1){
-
+                return true;
+            }
+            else {
+                return false;
             }
         }
+        return true;
     }
 
     public void dealer_Pot(){
@@ -161,4 +165,38 @@ public class Dealer<phasen> {
         Karte tNrKarte = alleKarten.remove(0);
         tableKarten.add(tNrKarte);
     }
+
+    public void next(Player player){
+        if (player.isYour_move() == 1) {
+            player.setYour_move(0);
+
+        }
+        else if (player.isYour_move() == 0){
+            player.setYour_move(1);
+        }
+    }
+
+    public void hNtCards(Karte karte1, Karte karte2, ArrayList<Karte> tableKarten){
+
+        hNtCards.add(karte1);
+        hNtCards.add(karte2);
+        hNtCards.addAll(tableKarten);
+
+    }
+
+    public KartenWert getyourcardswert(){
+        for (Karte karte : hNtCards) {
+            return karte.getWert();
+        }
+        return null;
+    }
+
+    public KartenFarbe getyourcardsFarbe(){
+        for (Karte karte : hNtCards) {
+            return karte.getFarbe();
+        }
+        return null;
+    }
+
+
 }
