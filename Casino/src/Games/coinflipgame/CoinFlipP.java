@@ -17,6 +17,8 @@ public class CoinFlipP extends JPanel {
     private JButton sevenButton;
     private JButton dropButton;
 
+    private int betAmount = 0;
+
     public CoinFlipP() {
         setOpaque(false); // Set the panel to be transparent
         setLayout(new GridBagLayout());
@@ -58,12 +60,33 @@ public class CoinFlipP extends JPanel {
 
         JPanel betAmountPanel = new JPanel(new GridLayout(2, 3));
 
-        JButton betAmountButton1 = new JButton();
-        JButton betAmountButton2 = new JButton();
-        JButton betAmountButton3 = new JButton();
-        JButton betAmountButton4 = new JButton();
-        JButton betAmountButton5 = new JButton();
-        JButton betAmountButton6 = new JButton();
+        JButton betAmountButton1 = new JButton("+5");
+        JButton betAmountButton2 = new JButton("+10");
+        JButton betAmountButton3 = new JButton("+100");
+        JButton betAmountButton4 = new JButton("-5");
+        JButton betAmountButton5 = new JButton("-10");
+        JButton betAmountButton6 = new JButton("-100");
+
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton source = (JButton) e.getSource();
+                String text = source.getText();
+                int i = Integer.parseInt(text);
+                betAmount += i;
+                System.out.println("Im Pot: " + betAmount);
+
+            }
+        };
+
+
+        betAmountButton1.addActionListener(listener);
+        betAmountButton2.addActionListener(listener);
+        betAmountButton3.addActionListener(listener);
+        betAmountButton4.addActionListener(listener);
+        betAmountButton5.addActionListener(listener);
+        betAmountButton6.addActionListener(listener);
 
         betAmountPanel.add(betAmountButton1);
         betAmountPanel.add(betAmountButton2);
