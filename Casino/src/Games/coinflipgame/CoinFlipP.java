@@ -163,7 +163,6 @@ public class CoinFlipP extends JPanel {
         coinFlipBet.setIcon(betIcon);
         coinFlipBet.setOpaque(false);
         coinFlipBet.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 //TODO: Chris soll mal was machen
@@ -175,7 +174,6 @@ public class CoinFlipP extends JPanel {
         coinFlipBack.setIcon(backIcon);
         coinFlipBack.setOpaque(false);
         coinFlipBack.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 //TODO: Chris soll mal was machen
