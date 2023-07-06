@@ -40,7 +40,7 @@ public class Persistenz {
             // liest die Datenbank.txt aus und gibt die user einzeln aus in einem Array gesplittet damit die 3 Daten übergeben werden können
             while (line != null){
                 String[] split = line.split(";");
-                ergebnis.add(new User(split[0],split[1],split[2]));
+                ergebnis.add(new User(split[0],split[1],split[2], Integer.parseInt(split[3])));
                 line = reader.readLine();
             }
         } catch (FileNotFoundException fileNotFoundException) {System.out.println(102);}

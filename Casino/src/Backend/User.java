@@ -13,10 +13,15 @@ public class User {
     private int user_Pearl; //Guthaben
 
     public User(String userName, String age, String password) {
+        this(userName, age, password, 1000);
+    }
+
+
+    public User(String userName, String age, String password, int perlen) {
         this.userName = userName;
         this.age = age;
         this.password = password;
-        user_Pearl = value.getPearl() * 1000; //Guthabenhöhe wird gesetzt
+        user_Pearl = value.getPearl() * perlen; //Guthabenhöhe wird gesetzt
         freeSpin = value.getFreespin_value() -90 ; //Freispiele anzahl wird gesetzt
     }
     //Return Methode für den Benutzernamen des User
