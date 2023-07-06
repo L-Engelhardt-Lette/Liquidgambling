@@ -110,6 +110,7 @@ public class UserUi extends JOptionPane {
             public void actionPerformed(ActionEvent e) {
                 Zentrale.getInstance().setActiveUser(null);
                 userUiFrame.dispose();
+                //TODO: Main Frame close und Login Page display
             }
         });
     }
