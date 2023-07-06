@@ -22,33 +22,9 @@ Backend:
 
 
 FÜR ALLE !:
-
 PRÄSENTATION VORBEREITEN!!!!!!!!!!!!!!!!!!!!!!!!
 
-
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 public class TODO {
     private boolean todo;

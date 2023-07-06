@@ -39,6 +39,11 @@ public class User {
     public int getUser_Pearl() {
         return user_Pearl;
     }
+
+    public void setUser_Pearl(int user_Pearl) {
+        this.user_Pearl = user_Pearl;
+    }
+
     //#
     public String getUser_Pearl_String(){
         String User_Pearl_String = Integer.toString(user_Pearl);
