@@ -182,6 +182,14 @@ public class CoinFlipP extends JPanel {
             }
         });
 
+        coinFlipBack.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+        });
+
         JPanel coinFlipPanel = new JPanel(new GridBagLayout());
         coinFlipPanel.setOpaque(false);
 
