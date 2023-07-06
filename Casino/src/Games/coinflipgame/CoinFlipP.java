@@ -1,9 +1,13 @@
 package Games.coinflipgame;
 
+import frontend.extraUi.SettingUi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class CoinFlipP extends JPanel {
@@ -61,9 +65,10 @@ public class CoinFlipP extends JPanel {
         JLabel resultLabel = new JLabel();
         resultLabel.setForeground(Color.WHITE); // Set text color to white
 
-        flipButton.addActionListener(new ActionListener() {
+        flipButton.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String betText = betField.getText();
                 if (betText.isEmpty()) {
                     resultLabel.setText("Please enter a bet amount.");
@@ -153,19 +158,29 @@ public class CoinFlipP extends JPanel {
         betAmountPanel.add(betAmountButton5);
         betAmountPanel.add(betAmountButton6);
 
-        JButton coinFlipBet = new JButton();
+        JLabel coinFlipBet = new JLabel();
         Icon betIcon = new ImageIcon("Casino/src/frontend/img/extraUiButtons/Bet.png");
         coinFlipBet.setIcon(betIcon);
         coinFlipBet.setOpaque(false);
-        coinFlipBet.setContentAreaFilled(false);
-        coinFlipBet.setBorderPainted(false);
+        coinFlipBet.addMouseListener(new MouseAdapter() {
 
-        JButton coinFlipBack = new JButton();
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //TODO: Chris soll mal was machen
+            }
+        });
+
+        JLabel coinFlipBack = new JLabel();
         Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
         coinFlipBack.setIcon(backIcon);
         coinFlipBack.setOpaque(false);
-        coinFlipBack.setContentAreaFilled(false);
-        coinFlipBack.setBorderPainted(false);
+        coinFlipBack.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //TODO: Chris soll mal was machen
+            }
+        });
 
         JPanel coinFlipPanel = new JPanel(new GridBagLayout());
         coinFlipPanel.setOpaque(false);

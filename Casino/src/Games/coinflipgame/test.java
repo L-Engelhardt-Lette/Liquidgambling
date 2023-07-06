@@ -6,126 +6,154 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class test extends JComponent {
+public class Test {
 
-    private int balance = 100;
-    private Random rand = new Random();
 
-    private ImageIcon headsIcon;
-    private ImageIcon tailsIcon;
+    public class CoinFlipP extends JPanel {
 
-    public test() {
-        setOpaque(false); // Set the component to be transparent
-        setDoubleBuffered(true); // Enable double-buffering
-        setLayout(new GridBagLayout());
+        private Random rand = new Random();
+        private int displayedValue = 0;
 
-        // Load images
-        headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
-        tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
+        private ImageIcon headsIcon;
+        private ImageIcon tailsIcon;
 
-        JLabel coinLabel = new JLabel();
-        coinLabel.setIcon(headsIcon);  // Set initial image
+        private JButton sevenButton;
+        private JButton dropButton;
 
-        JLabel balanceLabel = new JLabel("Balance: " + balance);
-        balanceLabel.setForeground(Color.WHITE); // Set text color to white
+        private int betAmount = 0;
 
-        JTextField betField = new JTextField();
-        JButton flipButton = new JButton("Flip the Coin");
-        JLabel resultLabel = new JLabel();
-        resultLabel.setForeground(Color.WHITE); // Set text color to white
+        public CoinFlipP() {
+            setOpaque(false); // Set the panel to be transparent
+            setLayout(new GridBagLayout());
 
-        flipButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String betText = betField.getText();
-                if (betText.isEmpty()) {
-                    resultLabel.setText("Please enter a bet amount.");
-                    return;
+            // Load images
+            headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
+            tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
+
+            JLabel coinLabel = new JLabel();
+            coinLabel.setBackground(new Color(0, 0, 0, 0));
+            coinLabel.setIcon(headsIcon);  // Set initial image
+
+            JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
+
+            sevenButton = createButton("Seven", Color.RED);
+            dropButton = createButton("Drop", Color.BLACK);
+
+            sevenButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sevenButton.setBackground(Color.WHITE);
+                    sevenButton.setForeground(Color.black);
+                    dropButton.setBackground(Color.BLACK);
+                    dropButton.setForeground(Color.WHITE);
                 }
-                int bet;
-                try {
-                    bet = Integer.parseInt(betText);
-                } catch (NumberFormatException ex) {
-                    resultLabel.setText("Invalid bet amount!");
-                    return;
+            });
+
+            dropButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sevenButton.setBackground(Color.RED);
+                    dropButton.setBackground(Color.WHITE);
+                    dropButton.setForeground(Color.black);
                 }
-                if (bet > balance) {
-                    resultLabel.setText("Insufficient balance!");
-                } else {
-                    flipButton.setEnabled(false);  // Disable button during animation
+            });
 
-                    // Start flip animation
-                    Timer timer = new Timer(100, new ActionListener() {
-                        private int count = 0;
+            coinSelectPanel.add(sevenButton);
+            coinSelectPanel.add(dropButton);
 
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (count < 10) {
-                                coinLabel.setIcon(count % 2 == 0 ? headsIcon : tailsIcon);
-                                count++;
-                                repaint(); // Trigger repaint
-                            } else {
-                                ((Timer) e.getSource()).stop();  // Stop the animation
-                                flipButton.setEnabled(true);  // Enable button after animation
+            JPanel betAmountPanel = new JPanel(new GridLayout(2, 3));
 
-                                boolean win = flipCoin();
-                                if (win) {
-                                    balance += bet;
-                                    resultLabel.setText("You won! New balance: " + balance);
-                                } else {
-                                    balance -= bet;
-                                    resultLabel.setText("You lost! New balance: " + balance);
-                                }
-                                balanceLabel.setText("Balance: " + balance);
-                            }
-                        }
-                    });
+            JButton betAmountButton1 = new JButton("+5");
+            JButton betAmountButton2 = new JButton("+10");
+            JButton betAmountButton3 = new JButton("+100");
+            JButton betAmountButton4 = new JButton("-5");
+            JButton betAmountButton5 = new JButton("-10");
+            JButton betAmountButton6 = new JButton("-100");
 
-                    timer.start();
+
+            ActionListener listener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton source = (JButton) e.getSource();
+                    String text = source.getText();
+                    int i = Integer.parseInt(text);
+                    betAmount += i;
+                    System.out.println("Im Pot: " + betAmount);
+
                 }
-            }
-        });
+            };
+            betAmountButton1.addActionListener(listener);
+            betAmountButton2.addActionListener(listener);
+            betAmountButton3.addActionListener(listener);
+            betAmountButton4.addActionListener(listener);
+            betAmountButton5.addActionListener(listener);
+            betAmountButton6.addActionListener(listener);
 
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setOpaque(false); // Set the panel to be transparent
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5, 5, 5, 5);
+            betAmountPanel.add(betAmountButton1);
+            betAmountPanel.add(betAmountButton2);
+            betAmountPanel.add(betAmountButton3);
+            betAmountPanel.add(betAmountButton4);
+            betAmountPanel.add(betAmountButton5);
+            betAmountPanel.add(betAmountButton6);
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(coinLabel, gbc);
+            JButton coinFlipBet = new JButton();
+            Icon betIcon = new ImageIcon("Casino/src/frontend/img/extraUiButtons/Bet.png");
+            coinFlipBet.setIcon(betIcon);
+            coinFlipBet.setOpaque(false);
+            coinFlipBet.setContentAreaFilled(false);
+            coinFlipBet.setBorderPainted(false);
 
-        gbc.gridy = 1;
-        panel.add(balanceLabel, gbc);
+            JButton coinFlipBack = new JButton();
+            Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+            coinFlipBack.setIcon(backIcon);
+            coinFlipBack.setOpaque(false);
+            coinFlipBack.setContentAreaFilled(false);
+            coinFlipBack.setBorderPainted(false);
 
-        gbc.gridy = 2;
-        panel.add(betField, gbc);
+            JPanel coinFlipPanel = new JPanel(new GridBagLayout());
+            coinFlipPanel.setOpaque(false);
 
-        gbc.gridy = 3;
-        panel.add(flipButton, gbc);
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(0, 0, 10, 0); // Add some vertical spacing between components
 
-        gbc.gridy = 4;
-        panel.add(resultLabel, gbc);
+            coinFlipPanel.add(coinLabel, gbc);
 
-        add(panel);
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-    }
+            gbc.gridy = 1;
+            gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
+            coinFlipPanel.add(coinSelectPanel, gbc);
 
-    private boolean flipCoin() {
-        return rand.nextInt(2) == 0;
-    }
+            gbc.gridy = 2;
+            gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
+            coinFlipPanel.add(betAmountPanel, gbc);
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame("Coin Flip Game");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.getContentPane().add(new CoinFlipP());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-        });
+            gbc.gridy = 3;
+            coinFlipPanel.add(coinFlipBet, gbc);
+
+            gbc.gridy = 4;
+            coinFlipPanel.add(coinFlipBack, gbc);
+
+            add(coinFlipPanel);
+            setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        }
+
+        private JButton createButton(String text, Color color) {
+            JButton button = new JButton(text);
+            button.setBackground(color);
+            button.setForeground(Color.WHITE);
+            button.setOpaque(true);
+            button.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(color, 2),
+                    BorderFactory.createEmptyBorder(5, 10, 5, 10)
+            ));
+            button.setFocusPainted(false);
+            button.setFont(button.getFont().deriveFont(Font.BOLD));
+            return button;
+        }
+
+        private boolean flipCoin() {
+            return rand.nextInt(2) == 0;
+        }
     }
 }
