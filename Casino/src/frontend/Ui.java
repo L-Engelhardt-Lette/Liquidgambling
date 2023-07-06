@@ -423,10 +423,6 @@ public class Ui {
         startUser.setContentAreaFilled(false);
         startUser.setBorderPainted(false);
 
-        //JPanel startAdminPanel = new JPanel();           Stuff für das Background
-        //startFrame.add(startAdminPanel); Stuff für den Background
-
-
         //Anzeige für die Pearl Balance
         startPearlCount.setForeground(Color.WHITE);
         startPearlCount.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -504,6 +500,7 @@ public class Ui {
         startSlots.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
             }
         });
