@@ -17,6 +17,7 @@ public class CoinFlipP extends JPanel {
     private JButton sevenButton;
     private JButton dropButton;
 
+    private int balance;
     private int betAmount = 0;
 
     public CoinFlipP() {
@@ -75,6 +76,7 @@ public class CoinFlipP extends JPanel {
                     resultLabel.setText("Invalid bet amount!");
                     return;
                 }
+
                 if (bet > balance) {
                     resultLabel.setText("Insufficient balance!");
                 } else {
