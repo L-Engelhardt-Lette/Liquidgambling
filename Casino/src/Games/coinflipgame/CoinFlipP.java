@@ -1,7 +1,7 @@
-package coinflipgame;
+package Games.coinflipgame;
 
 import frontend.Ui;
-import stuff.Zentrale;
+import Backend.Zentrale;
 
 import javax.swing.*;
 import java.awt.*;

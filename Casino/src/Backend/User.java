@@ -1,9 +1,5 @@
-package stuff;
+package Backend;
 
-import Datenbank.Persistenz;
-
-import java.io.*;
-import java.util.ArrayList;
 /* Die User Class beinhaltet alle Eigenschaften und Methoden um die Info über die User in dem Programm zu verarbeiten
  * zur verfügung zu stellen.
  * Die Class vergibt den Benutzername, Passwort, Alter, wie viele Freispiele er hat und wie viele Perlen(Währung) er besitzt. */

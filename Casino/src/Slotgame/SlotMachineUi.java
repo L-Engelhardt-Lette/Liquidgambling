@@ -1,5 +1,5 @@
 
-package slotgame;
+package Slotgame;
 
 import java.awt.*;
 import javax.swing.*;

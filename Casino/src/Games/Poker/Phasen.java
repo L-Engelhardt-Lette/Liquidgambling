@@ -1,9 +1,7 @@
-package stuff;
+package Games.Poker;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum Phasen {

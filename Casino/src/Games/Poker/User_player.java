@@ -1,4 +1,7 @@
-package stuff;
+package Games.Poker;
+
+import Backend.User;
+import Backend.Zentrale;
 
 public class User_player extends Player {
 

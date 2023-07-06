@@ -1,11 +1,12 @@
 package frontend;
 
-import  Datenbank.Persistenz;
-import coinflipgame.CoinFlipP;
+
+import Backend.Datenbank.Persistenz;
+import Games.coinflipgame.CoinFlipP;
 import frontend.extraUi.SettingUi;
 import frontend.extraUi.UserUi;
-import stuff.User;
-import stuff.Zentrale;
+import Backend.User;
+import Backend.Zentrale;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
