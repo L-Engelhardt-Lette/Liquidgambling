@@ -1,5 +1,7 @@
 package frontend.extraUi;
 
+import Backend.Datenbank.Persistenz;
+import Backend.User;
 import Backend.Zentrale;
 import frontend.Ui;
 
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserUi extends JOptionPane {
 
@@ -37,15 +40,15 @@ public class UserUi extends JOptionPane {
 
         JLabel userInfoNameLabel = new JLabel("Username: ");
         userInfoNameLabel.setForeground(Color.white);
-        JLabel userInfoNameLabelDisplay = new JLabel();
+        JLabel userInfoNameLabelDisplay = new JLabel(Zentrale.getInstance().getActiveUser().getUserName());
         userInfoNameLabelDisplay.setForeground(Color.white);
         JLabel userInfoAgeLabel = new JLabel("Age: ");
         userInfoAgeLabel.setForeground(Color.white);
-        JLabel userInfoAgeLabelDisplay = new JLabel();
+        JLabel userInfoAgeLabelDisplay = new JLabel(Zentrale.getInstance().getActiveUser().getAge());
         userInfoAgeLabelDisplay.setForeground(Color.white);
         JLabel userInfoPearlLabel = new JLabel("Pearl-count: ");
         userInfoPearlLabel.setForeground(Color.white);
-        JLabel userInfoPearlLabelDisplay = new JLabel();
+        JLabel userInfoPearlLabelDisplay = new JLabel(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
         userInfoPearlLabelDisplay.setForeground(Color.white);
 
 
@@ -108,6 +111,15 @@ public class UserUi extends JOptionPane {
         userUiLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<User> reading = Persistenz.reading();
+                User activeUser = Zentrale.getInstance().getActiveUser();
+
+                for (User user : reading) {
+                    if (user.getUserName().equals(activeUser.getUserName()) && user.getPassword().equals(activeUser.getPassword())){
+                        user.setUser_Pearl(activeUser.getUser_Pearl());
+                    }
+                }
+                Persistenz.writing(reading);
                 Zentrale.getInstance().setActiveUser(null);
                 userUiFrame.dispose();
                 //TODO: Main Frame close und Login Page display
