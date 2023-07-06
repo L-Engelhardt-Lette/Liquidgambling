@@ -11,7 +11,8 @@ import javax.swing.border.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SlotMachineUi {
+public class
+SlotMachineUi {
 
 	private JButton btnCash, btnSpin;
 	private JCheckBox cbAlwaysWin, cbSuperJackpot, cbTrollface;
