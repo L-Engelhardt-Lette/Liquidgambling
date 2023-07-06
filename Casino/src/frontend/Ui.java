@@ -473,7 +473,7 @@ public class Ui {
         startCoinflip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CoinFlipP coinflipPanel = new CoinFlipP(Ui.this);
+                CoinFlipP coinflipPanel = new CoinFlipP();
                 JButton back = new JButton("BACK");
                 JPanel coinflipMainPanel = new JPanel();
                 back.addActionListener(new ActionListener() {
