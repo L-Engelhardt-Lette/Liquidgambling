@@ -14,31 +14,63 @@ public class Regelwerk {
 
     private Phasen phasen;
 
-    public void update_Phasen(Dealer dealer){
-        if (dealer.getPhasen()[0] == Phasen.PRE_FLOP){
-            if (dealer.sit_down() == true){
+    public void update_Phasen(Dealer dealer) {
+        if (dealer.getPhasen() == Phasen.PRE_FLOP) {
+            if (dealer.sit_down() == true) {
                 dealer.Made_C_deck();
                 dealer.deal();
+                dealer.setPhasen();
+            }
+            if (dealer.getPhasen() == Phasen.FLOP) {
+                dealer.lay_Flop();
+                dealer.setPhasen();
+            }
+            if (dealer.getPhasen() == Phasen.TURN) {
+                dealer.lay_TnR();
+                dealer.setPhasen();
+            }
+            if (dealer.getPhasen() == Phasen.RIVER) {
+                dealer.lay_TnR();
+                dealer.setPhasen();
+            } else {
+                System.out.printf("KEINE AKTIVE PHASE!!");
             }
         }
     }
 
-    public static boolean istFlush(ArrayList<Karte> alleKarten){
 
+    public static boolean istFlush(ArrayList<Karte> alleKarten) {
 
         Karte karte = alleKarten.get(0);
         KartenFarbe farbe = karte.getFarbe();
 
         for (Karte karte1 : alleKarten) {
-            if (karte1.getFarbe() != farbe){
+            if (karte1.getFarbe() != farbe) {
                 return false;
             }
         }
         return true;
     }
 
+    public static boolean istPaar(ArrayList<Karte> alleKarten) {
 
+        Karte karte = alleKarten.get(0);
+        KartenWert wert = karte.getWert();
 
+        for (Karte karte1 : alleKarten) {
+            if (karte1.getWert() == wert) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-
+    public static boolean istStraße(ArrayList<Karte> alleKarten){
+        for (Karte karte : alleKarten) {
+            karte.getWert();
+            for (Karte karte1 : alleKarten) {
+                if (karte1.getWert() == karte.getWert() += 1 && karte1.getWert() == karte.getWert() += 2 &&)
+            }
+        }
+    }
 }

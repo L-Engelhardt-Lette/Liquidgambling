@@ -66,14 +66,14 @@ public class UserUi extends JOptionPane {
         userInfoLabel.setForeground(Color.WHITE);
 
         userUiBack.addActionListener(new ActionListener(){
-                                         public void actionPerformed(ActionEvent evt) {
-                                             Window w = SwingUtilities.getWindowAncestor(userUiBack);
+            public void actionPerformed(ActionEvent evt) {
+                Window w = SwingUtilities.getWindowAncestor(userUiBack);
 
-                                             if (w != null) {
-                                                 w.setVisible(false);
-                                             }
-                                         }
-                                     });
+                if (w != null) {
+                    w.setVisible(false);
+                }
+            }
+        });
 
         backgroundpanel.setLayout(new GridBagLayout());
 
