@@ -336,7 +336,7 @@ public class Ui {
             a.printStackTrace();
         }
 
-        JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/mcbg.jpg");
+        JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/bgImg.jpg");
         backgroundPanel.setLayout(new BorderLayout());
         startFrame.setContentPane(backgroundPanel);
 
