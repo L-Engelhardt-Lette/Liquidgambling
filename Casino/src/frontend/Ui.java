@@ -33,8 +33,8 @@ public class Ui {
         JPanel loginMain = new JPanel(new BorderLayout());
         JLabel loginLogoLabel = createLogoLabel();
         JPanel loginCenterPanel = new JPanel(new GridBagLayout());
-        JButton loginButton = new JButton();
-        JButton loginRegister = new JButton();
+        JLabel loginButton = new JLabel();
+        JLabel loginRegister = new JLabel();
         JPanel loginBackground = new JPanel(){
             protected void paintComponent(Graphics grphcs) {
                 super.paintComponent(grphcs);
@@ -51,6 +51,8 @@ public class Ui {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
+
+        loginUi.setContentPane(loginBackground);
 
         JTextField loginUsername = new JTextField("LEDEAdmin");
         loginUsername.setPreferredSize(new Dimension(300, 40));
@@ -73,15 +75,13 @@ public class Ui {
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
         loginButton.setIcon(loginicon);
         loginButton.setOpaque(false);
-        loginButton.setContentAreaFilled(false);
-        loginButton.setBorderPainted(false);
+//        loginButton.setContentAreaFilled(false);
+//        loginButton.setBorderPainted(false);
 
         // Icon für den Register Button
         Icon registericon = new ImageIcon("Casino/src/frontend/img/loginButton/register128.png");
         loginRegister.setIcon(registericon);
         loginRegister.setOpaque(false);
-        loginRegister.setContentAreaFilled(false);
-        loginRegister.setBorderPainted(false);
 
         // Vorgaben für das Login Fenster
         loginUi.setSize(800, 600);
@@ -107,14 +107,14 @@ public class Ui {
 
         // Zuweisung von Hauptelementen zu dem Login Frame
         loginMain.add(loginCenterPanel, BorderLayout.CENTER);
-        loginBackground.add(loginMain);
-        loginUi.add(loginBackground);
+        loginUi.add(loginMain);
         loginUi.setVisible(true);
 
         // Zuweisung was der Login Button macht
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 ArrayList<User> reading = Persistenz.reading();
                 boolean userLoginCorrect = false;
                 for (User user : reading) {
@@ -135,14 +135,15 @@ public class Ui {
             }
         });
 
-        loginRegister.addActionListener(new ActionListener() {
+        loginRegister.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 JPanel registerMain = new JPanel(new BorderLayout());
                 JPanel registerPanel = new JPanel(new GridBagLayout());
                 JLabel registerLogo = createLogoLabel();
-                JButton registerButton = new JButton();
-                JButton registerBack = new JButton();
+                JLabel registerButton = new JLabel();
+                JLabel registerBack = new JLabel();
                 JPanel registerBackgroundPanel = new JPanel(){
                     protected void paintComponent(Graphics grphcs) {
                         super.paintComponent(grphcs);
@@ -188,14 +189,10 @@ public class Ui {
                 Icon registerIcon256 = new ImageIcon("Casino/src/frontend/img/loginButton/register256.png");
                 registerButton.setIcon(registerIcon256);
                 registerButton.setOpaque(false);
-                registerButton.setContentAreaFilled(false);
-                registerButton.setBorderPainted(false);
 
                 Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
                 registerBack.setIcon(backIcon);
                 registerBack.setOpaque(false);
-                registerBack.setContentAreaFilled(false);
-                registerBack.setBorderPainted(false);
 
                 registerPanel.add(registerLogo, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 registerPanel.add(registerUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
@@ -210,15 +207,16 @@ public class Ui {
                 registerBackgroundPanel.add(registerPanel);
                 registerMain.add(registerBackgroundPanel, BorderLayout.CENTER);
 
-                loginBackground.remove(loginMain);
-                loginBackground.add(registerMain);
+                loginUi.remove(loginMain);
+                loginUi.add(registerMain);
                 loginUi.revalidate();
                 loginUi.revalidate();
                 loginUi.repaint();
 
-                registerButton.addActionListener(new ActionListener() {
+                registerButton.addMouseListener(new MouseAdapter() {
+
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void mousePressed(MouseEvent e) {
                         try {
                             ArrayList<User> reading = Persistenz.reading();
                             User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
@@ -235,8 +233,8 @@ public class Ui {
                             Persistenz.writing(reading);
 
                             JOptionPane.showMessageDialog(null, "Account wurde erstellt\nViel Spaß beim Spielen");
-                            loginBackground.remove(registerMain);
-                            loginBackground.add(loginMain);
+                            loginUi.remove(registerMain);
+                            loginUi.add(loginMain);
                             loginUi.revalidate();
                             loginUi.revalidate();
                             loginUi.repaint();
@@ -251,11 +249,12 @@ public class Ui {
                 });
 
 
-                registerBack.addActionListener(new ActionListener() {
+                registerBack.addMouseListener(new MouseAdapter() {
+
                     @Override
-                    public void actionPerformed(ActionEvent e) {
-                        loginBackground.remove(registerMain);
-                        loginBackground.add(loginMain);
+                    public void mousePressed(MouseEvent e) {
+                        loginUi.remove(registerMain);
+                        loginUi.add(loginMain);
                         loginUi.revalidate();
                         loginUi.repaint();
                     }
@@ -272,11 +271,11 @@ public class Ui {
         startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
         startFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         startFrame.setUndecorated(true);
-        JButton startNameLogo = new JButton();
-        JButton startSetting = new JButton();
-        JButton startCoinflip = new JButton();
-        JButton startPoker = new JButton();
-        JButton startSlots = new JButton();
+        JLabel startNameLogo = new JLabel();
+        JLabel startSetting = new JLabel();
+        JLabel startCoinflip = new JLabel();
+        JLabel startPoker = new JLabel();
+        JLabel startSlots = new JLabel();
         JLabel startCoinflipLable = new JLabel();
         JLabel startPokerLable = new JLabel();
         JLabel startSlotsLable = new JLabel();
@@ -291,16 +290,18 @@ public class Ui {
 
 
         // ActionListener
-        startSetting.addActionListener(new ActionListener() {
+        startSetting.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 SettingUi settingUi = new SettingUi();
                 settingUi.setVisible(true);
             }
         });
-        startUser.addActionListener(new ActionListener() {
+        startUser.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 UserUi userUi = new UserUi();
                 userUi.setVisible(true);
             }
@@ -335,7 +336,7 @@ public class Ui {
             a.printStackTrace();
         }
 
-        JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/mcbg.jpg");
+        JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/bgImg.jpg");
         backgroundPanel.setLayout(new BorderLayout());
         startFrame.setContentPane(backgroundPanel);
 
@@ -362,20 +363,14 @@ public class Ui {
         Icon pokericon = new ImageIcon("Casino/src/frontend/img/gameButtons/poker512.png");
         startPoker.setIcon(pokericon);
         startPoker.setOpaque(false);
-        startPoker.setContentAreaFilled(false);
-        startPoker.setBorderPainted(false);
 
         Icon slotsicon = new ImageIcon("Casino/src/frontend/img/gameButtons/slots512.png");
         startSlots.setIcon(slotsicon);
-        startSlots.setOpaque(false);
-        startSlots.setContentAreaFilled(false);
-        startSlots.setBorderPainted(false);
+        startSlots.setOpaque(false);;
 
         Icon coinflipicon = new ImageIcon("Casino/src/frontend/img/gameButtons/coinflip512.png");
         startCoinflip.setIcon(coinflipicon);
         startCoinflip.setOpaque(false);
-        startCoinflip.setContentAreaFilled(false);
-        startCoinflip.setBorderPainted(false);
 
         //Die Buttons die zum game führen
         JPanel startPokerPanel = new JPanel(new GridLayout(2, 1));
@@ -401,8 +396,6 @@ public class Ui {
         //startNameLogo.addActionListener(clickToGoHome); //TODO: Home Button Actionlistener adden
         startNameLogo.setIcon(logoIcon);
         startNameLogo.setOpaque(false);
-        startNameLogo.setContentAreaFilled(false);
-        startNameLogo.setBorderPainted(false);
 
         //Pearl Icon
         Icon pearlIcon = new ImageIcon("Casino/src/frontend/img/Logo/pearl64px.png");
@@ -413,8 +406,6 @@ public class Ui {
         Icon settingIcon = new ImageIcon("Casino/src/frontend/img/Logo/setting64px.png");
         startSetting.setIcon(settingIcon);
         startSetting.setOpaque(false);
-        startSetting.setContentAreaFilled(false);
-        startSetting.setBorderPainted(false);
 
         //User Button
         Icon userIcon = new ImageIcon("Casino/src/frontend/img/Logo/user64px.png");
@@ -451,34 +442,43 @@ public class Ui {
         startFrame.setVisible(true);
 
 
-        startPoker.addActionListener(e -> {
-            JPanel pokerPanel = new JPanel();
-            JButton back = new JButton("BACK");
-            back.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    startFrame.remove(pokerPanel);
-                    startFrame.add(startMainPanel, BorderLayout.CENTER);
-                    startFrame.revalidate();
-                    startFrame.revalidate();
-                    startFrame.repaint();
-                }
-            });
-            pokerPanel.add(back);
-            startFrame.remove(startMainPanel);
-            startFrame.add(pokerPanel, BorderLayout.CENTER);
-            startFrame.revalidate();
-            startFrame.revalidate();
-        });
-        startCoinflip.addActionListener(new ActionListener() {
+        startPoker.addMouseListener(new MouseAdapter() {
+
+                                        @Override
+                                        public void mousePressed(MouseEvent e) {
+                                            JPanel pokerPanel = new JPanel();
+                                            JButton back = new JButton("BACK");
+                                            back.addMouseListener(new MouseAdapter() {
+
+                                                @Override
+                                                public void mousePressed(MouseEvent e) {
+                                                    startFrame.remove(pokerPanel);
+                                                    startFrame.add(startMainPanel, BorderLayout.CENTER);
+                                                    startFrame.revalidate();
+                                                    startFrame.revalidate();
+                                                    startFrame.repaint();
+                                                }
+                                            });
+                                            pokerPanel.add(back);
+                                            startFrame.remove(startMainPanel);
+                                            startFrame.add(pokerPanel, BorderLayout.CENTER);
+                                            startFrame.revalidate();
+                                            startFrame.revalidate();
+
+                                        }
+                                    });
+
+        startCoinflip.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 CoinFlipP coinflipPanel = new CoinFlipP();
                 JButton back = new JButton("BACK");
                 JPanel coinflipMainPanel = new JPanel();
-                back.addActionListener(new ActionListener() {
+                back.addMouseListener(new MouseAdapter() {
+
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void mousePressed(MouseEvent e) {
                         startFrame.remove(coinflipMainPanel);
                         startFrame.add(startMainPanel, BorderLayout.CENTER);
                         startFrame.revalidate();
@@ -497,9 +497,10 @@ public class Ui {
                 startFrame.repaint();
             }
         });
-        startSlots.addActionListener(new ActionListener() {
+        startSlots.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
 
 
             }
