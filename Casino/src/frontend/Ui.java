@@ -33,7 +33,7 @@ public class Ui {
         JPanel loginMain = new JPanel(new BorderLayout());
         JLabel loginLogoLabel = createLogoLabel();
         JPanel loginCenterPanel = new JPanel(new GridBagLayout());
-        JButton loginButton = new JButton();
+        JLabel loginButton = new JLabel();
         JButton loginRegister = new JButton();
         JPanel loginBackground = new JPanel(){
             protected void paintComponent(Graphics grphcs) {
@@ -51,6 +51,8 @@ public class Ui {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
+
+        loginUi.setContentPane(loginBackground);
 
         JTextField loginUsername = new JTextField("LEDEAdmin");
         loginUsername.setPreferredSize(new Dimension(300, 40));
@@ -73,8 +75,8 @@ public class Ui {
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
         loginButton.setIcon(loginicon);
         loginButton.setOpaque(false);
-        loginButton.setContentAreaFilled(false);
-        loginButton.setBorderPainted(false);
+//        loginButton.setContentAreaFilled(false);
+//        loginButton.setBorderPainted(false);
 
         // Icon für den Register Button
         Icon registericon = new ImageIcon("Casino/src/frontend/img/loginButton/register128.png");
@@ -107,14 +109,14 @@ public class Ui {
 
         // Zuweisung von Hauptelementen zu dem Login Frame
         loginMain.add(loginCenterPanel, BorderLayout.CENTER);
-        loginBackground.add(loginMain);
-        loginUi.add(loginBackground);
+        loginUi.add(loginMain);
         loginUi.setVisible(true);
 
         // Zuweisung was der Login Button macht
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 ArrayList<User> reading = Persistenz.reading();
                 boolean userLoginCorrect = false;
                 for (User user : reading) {
@@ -210,8 +212,8 @@ public class Ui {
                 registerBackgroundPanel.add(registerPanel);
                 registerMain.add(registerBackgroundPanel, BorderLayout.CENTER);
 
-                loginBackground.remove(loginMain);
-                loginBackground.add(registerMain);
+                loginUi.remove(loginMain);
+                loginUi.add(registerMain);
                 loginUi.revalidate();
                 loginUi.revalidate();
                 loginUi.repaint();
@@ -235,8 +237,8 @@ public class Ui {
                             Persistenz.writing(reading);
 
                             JOptionPane.showMessageDialog(null, "Account wurde erstellt\nViel Spaß beim Spielen");
-                            loginBackground.remove(registerMain);
-                            loginBackground.add(loginMain);
+                            loginUi.remove(registerMain);
+                            loginUi.add(loginMain);
                             loginUi.revalidate();
                             loginUi.revalidate();
                             loginUi.repaint();
@@ -254,8 +256,8 @@ public class Ui {
                 registerBack.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        loginBackground.remove(registerMain);
-                        loginBackground.add(loginMain);
+                        loginUi.remove(registerMain);
+                        loginUi.add(loginMain);
                         loginUi.revalidate();
                         loginUi.repaint();
                     }
