@@ -62,8 +62,7 @@ public class CoinFlipP extends JPanel {
         coinLabel.setBackground(new Color(0, 0, 0, 0));
         coinLabel.setIcon(headsIcon);  // Set initial image
 
-
-
+        betAmountLabel.setBackground(new Color(0,0,0,0));
 
 
 
