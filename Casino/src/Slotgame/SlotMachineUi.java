@@ -565,15 +565,15 @@ SlotMachineUi {
 	 *		�	Remove images here to make game easier. 
 	 */
 	public void loadImages() {
-		images.add(createImageIcon("images/Banana.png", "Banana"));
-		images.add(createImageIcon("images/Bar.png", "Bar"));
-		images.add(createImageIcon("images/Bell.png", "Bell"));
-		images.add(createImageIcon("images/Cherry.png", "Cherry"));
-		images.add(createImageIcon("images/Clover.png", "Clover"));
-		images.add(createImageIcon("images/Diamond.png", "Diamond"));
-		images.add(createImageIcon("images/Plum.png", "Plum"));
-		images.add(createImageIcon("images/Seven.png", "Seven"));
-		images.add(createImageIcon("images/Watermelon.png", "Watermelon"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Banana.png", "Banana"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Bar.png", "Bar"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Bell.png", "Bell"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Cherry.png", "Cherry"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Clover.png", "Clover"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Diamond.png", "Diamond"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Plum.png", "Plum"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Seven.png", "Seven"));
+		images.add(createImageIcon("Casino/src/frontend/img/slotImages/Watermelon.png", "Watermelon"));
 	}
 
 	/** Create a new ImageIcon, unless the URL is not found. */
