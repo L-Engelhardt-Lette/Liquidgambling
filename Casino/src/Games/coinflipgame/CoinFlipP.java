@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class CoinFlipP extends JPanel {
@@ -32,14 +34,36 @@ public class CoinFlipP extends JPanel {
         headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
         tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
 
+        //Bet Buttons
+        sevenButton = createButton("Seven", Color.RED);
+        dropButton = createButton("Drop", Color.BLACK);
+
+        //Erstelung der Elemente
         JLabel coinLabel = new JLabel();
+        JLabel betAmountLabel = new JLabel();
+        JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
+        JLabel betField = new JLabel();
+        JLabel resultLabel = new JLabel();
+
+        // Sucht die Fonts für das Programm
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
+            Font mainfont = font.deriveFont(50f);
+            coinLabel.setFont(mainfont);
+            betAmountLabel.setFont(mainfont);
+
+        } catch (FontFormatException | IOException a) {
+            a.printStackTrace();
+        }
+
+        //Coin Label Settings
         coinLabel.setBackground(new Color(0, 0, 0, 0));
         coinLabel.setIcon(headsIcon);  // Set initial image
 
-        JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
 
-        sevenButton = createButton("Seven", Color.RED);
-        dropButton = createButton("Drop", Color.BLACK);
+
+
+
 
         sevenButton.addActionListener(new ActionListener() {
             @Override
@@ -60,15 +84,14 @@ public class CoinFlipP extends JPanel {
             }
         });
 
-        JTextField betField = new JTextField();
-        JLabel resultLabel = new JLabel();
+
         resultLabel.setForeground(Color.WHITE); // Set text color to white
 
 
         coinSelectPanel.add(sevenButton);
         coinSelectPanel.add(dropButton);
 
-        JPanel betAmountPanel = new JPanel(new GridLayout(2, 3));
+        JPanel betAmountButtonsPanel = new JPanel(new GridLayout(2, 3));
 
         JButton betAmountButton1 = new JButton("+5");
         JButton betAmountButton2 = new JButton("+10");
@@ -85,8 +108,7 @@ public class CoinFlipP extends JPanel {
                 String text = source.getText();
                 int i = Integer.parseInt(text);
                 betAmount += i;
-                System.out.println("Im Pot: " + betAmount);
-
+                betAmountLabel.setText("Im Pot: " + betAmount);
             }
         };
 
@@ -98,23 +120,17 @@ public class CoinFlipP extends JPanel {
         betAmountButton5.addActionListener(listener);
         betAmountButton6.addActionListener(listener);
 
-        betAmountPanel.add(betAmountButton1);
-        betAmountPanel.add(betAmountButton2);
-        betAmountPanel.add(betAmountButton3);
-        betAmountPanel.add(betAmountButton4);
-        betAmountPanel.add(betAmountButton5);
-        betAmountPanel.add(betAmountButton6);
+        betAmountButtonsPanel.add(betAmountButton1);
+        betAmountButtonsPanel.add(betAmountButton2);
+        betAmountButtonsPanel.add(betAmountButton3);
+        betAmountButtonsPanel.add(betAmountButton4);
+        betAmountButtonsPanel.add(betAmountButton5);
+        betAmountButtonsPanel.add(betAmountButton6);
 
         JLabel coinFlipBet = new JLabel();
         Icon betIcon = new ImageIcon("Casino/src/frontend/img/extraUiButtons/Bet.png");
         coinFlipBet.setIcon(betIcon);
         coinFlipBet.setOpaque(false);
-        coinFlipBet.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                //TODO: Chris soll mal was machen
-            }
-        });
         coinFlipBet.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -189,11 +205,11 @@ public class CoinFlipP extends JPanel {
 
         gbc.gridy = 1;
         gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
-        coinFlipPanel.add(coinSelectPanel, gbc);
+        coinFlipPanel.add(betAmountLabel, gbc);
 
         gbc.gridy = 2;
         gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
-        coinFlipPanel.add(betAmountPanel, gbc);
+        coinFlipPanel.add(betAmountButtonsPanel, gbc);
 
         gbc.gridy = 3;
         coinFlipPanel.add(coinFlipBet, gbc);
