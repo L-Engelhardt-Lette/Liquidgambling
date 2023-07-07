@@ -91,11 +91,17 @@ public class CoinFlipP extends JPanel {
         dropButton = createButton("Drop", Color.BLACK);
 
         // ActionListener for the "Seven" button
-        sevenButton.addActionListener(new ActionListener() {
+        ActionListener betListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                Object source = e.getSource();
+                boolean sevenWasClicked = source.equals(sevenButton);
                 Random random =  new Random();
-                boolean sd =  random.nextBoolean();
+                boolean r = random.nextBoolean();
+                boolean gewonnen = r == sevenWasClicked;
+                System.out.println(r);
+                System.out.println(gewonnen);
                 String betText = betlabel.getText();
                 if (betText.isEmpty()) {
                     System.out.println("Please enter a bet amount.");
@@ -111,6 +117,7 @@ public class CoinFlipP extends JPanel {
 
                 if (bet > balance) {
                     System.out.println("Insufficient balance!");
+                    return;
                 } else {
                     coinFlipBet.setEnabled(false);  // Disable button during animation
 
@@ -128,8 +135,8 @@ public class CoinFlipP extends JPanel {
                                 ((Timer) e.getSource()).stop();  // Stop the animation
                                 coinFlipBet.setEnabled(true);  // Enable button after animation
 
-                                boolean win = flipCoin();
-                                if (win) {
+
+                                if (gewonnen) {
                                     Zentrale.getInstance().getActiveUser().plus(bet);
                                     System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 } else {
@@ -148,64 +155,10 @@ public class CoinFlipP extends JPanel {
                 dropButton.setBackground(Color.BLACK);
                 dropButton.setForeground(Color.WHITE);
             }
-        });
+        };
 
-        // ActionListener for the "Drop" button
-        dropButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String betText = betlabel.getText();
-                if (betText.isEmpty()) {
-                    System.out.println("Please enter a bet amount.");
-                    return;
-                }
-                int bet;
-                try {
-                    bet = betAmount;
-                } catch (NumberFormatException ex) {
-                    System.out.println("Invalid bet amount!");
-                    return;
-                }
-
-                if (bet > balance) {
-                    System.out.println("Insufficient balance!");
-                } else {
-                    coinFlipBet.setEnabled(false);  // Disable button during animation
-
-                    // Start flip animation
-                    Timer timer = new Timer(100, new ActionListener() {
-                        private int count = 0;
-
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (count < 10) {
-                                coinLabel.setIcon(count % 2 == 0 ? headsIcon : tailsIcon);
-                                count++;
-                                repaint(); // Trigger repaint
-                            } else {
-                                ((Timer) e.getSource()).stop();  // Stop the animation
-                                coinFlipBet.setEnabled(true);  // Enable button after animation
-
-                                boolean win = flipCoin();
-                                if (win) {
-                                    Zentrale.getInstance().getActiveUser().plus(bet);
-                                    System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
-                                } else {
-                                    Zentrale.getInstance().getActiveUser().minus(bet);
-                                    System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
-                                }
-                            }
-                        }
-                    });
-
-                    timer.start();
-                }
-
-                sevenButton.setBackground(Color.RED);
-                dropButton.setBackground(Color.WHITE);
-                dropButton.setForeground(Color.black);
-            }
-        });
+        sevenButton.addActionListener(betListener);
+        dropButton.addActionListener(betListener);
 
 
         resultLabel.setForeground(Color.WHITE); // Set text color to white
