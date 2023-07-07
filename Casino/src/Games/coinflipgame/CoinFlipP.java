@@ -1,5 +1,7 @@
+// Package declaration
 package Games.coinflipgame;
 
+// Import statements
 import Backend.Zentrale;
 import frontend.extraUi.SettingUi;
 
@@ -11,8 +13,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
+// Class declaration
 public class CoinFlipP extends JPanel {
 
+    // Instance variables
     private Random rand = new Random();
     private int displayedValue = 0;
 
@@ -25,13 +29,15 @@ public class CoinFlipP extends JPanel {
     private int balance = Zentrale.getInstance().getActiveUser().getUser_Pearl();
     private int betAmount = 0;
 
+    // Constructor
     public CoinFlipP() {
         setOpaque(false); // Set the panel to be transparent
         setLayout(new GridBagLayout());
 
-
+        // Create the bet amount panel
         JPanel betAmountPanel = new JPanel(new GridLayout(2, 3));
 
+        // Create the bet amount buttons
         JButton betAmountButton1 = new JButton("+5");
         JButton betAmountButton2 = new JButton("+10");
         JButton betAmountButton3 = new JButton("+100");
@@ -40,6 +46,7 @@ public class CoinFlipP extends JPanel {
         JButton betAmountButton6 = new JButton("-100");
         JLabel betlabel = new JLabel();
 
+        // ActionListener for bet amount buttons
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,7 +58,7 @@ public class CoinFlipP extends JPanel {
             }
         };
 
-
+        // Add the ActionListener to the bet amount buttons
         betAmountButton1.addActionListener(listener);
         betAmountButton2.addActionListener(listener);
         betAmountButton3.addActionListener(listener);
@@ -59,13 +66,15 @@ public class CoinFlipP extends JPanel {
         betAmountButton5.addActionListener(listener);
         betAmountButton6.addActionListener(listener);
 
+        // Add the bet amount buttons to the panel
         betAmountPanel.add(betAmountButton1);
         betAmountPanel.add(betAmountButton2);
         betAmountPanel.add(betAmountButton3);
         betAmountPanel.add(betAmountButton4);
         betAmountPanel.add(betAmountButton5);
         betAmountPanel.add(betAmountButton6);
-        // Load images
+
+        // Load images for coin icons
         headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
         tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
 
@@ -76,14 +85,12 @@ public class CoinFlipP extends JPanel {
 
         JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
 
-
-
-
         JLabel resultLabel = new JLabel();
         JLabel coinFlipBet = new JLabel();
         sevenButton = createButton("Seven", Color.RED);
         dropButton = createButton("Drop", Color.BLACK);
 
+        // ActionListener for the "Seven" button
         sevenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,10 +131,10 @@ public class CoinFlipP extends JPanel {
                                 boolean win = flipCoin();
                                 if (win) {
                                     Zentrale.getInstance().getActiveUser().plus(bet);
-                                   System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 } else {
                                     Zentrale.getInstance().getActiveUser().minus(bet);
-                                   System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 }
                             }
                         }
@@ -136,8 +143,6 @@ public class CoinFlipP extends JPanel {
                     timer.start();
                 }
 
-
-
                 sevenButton.setBackground(Color.WHITE);
                 sevenButton.setForeground(Color.black);
                 dropButton.setBackground(Color.BLACK);
@@ -145,6 +150,7 @@ public class CoinFlipP extends JPanel {
             }
         });
 
+        // ActionListener for the "Drop" button
         dropButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -201,6 +207,7 @@ public class CoinFlipP extends JPanel {
             }
         });
 
+
         resultLabel.setForeground(Color.WHITE); // Set text color to white
 
 
@@ -219,6 +226,9 @@ public class CoinFlipP extends JPanel {
             }
         });
 
+
+        // Create the coin flip panel
+
         JPanel coinFlipPanel = new JPanel(new GridBagLayout());
         coinFlipPanel.setOpaque(false);
 
@@ -230,7 +240,7 @@ public class CoinFlipP extends JPanel {
         coinFlipPanel.add(coinLabel, gbc);
 
         gbc.gridy = 1;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
+        gbc.insets = new Insets(0, 0, 10, 0); //Add spacing between components
         coinFlipPanel.add(coinSelectPanel, gbc);
 
         gbc.gridy = 2;
@@ -240,12 +250,12 @@ public class CoinFlipP extends JPanel {
         gbc.gridy = 3;
         coinFlipPanel.add(coinFlipBet, gbc);
 
-
-
+        // Add coinFlipPanel to the main panel
         add(coinFlipPanel);
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
     }
 
+    // Utility method to create a customized button
     private JButton createButton(String text, Color color) {
         JButton button = new JButton(text);
         button.setBackground(color);
@@ -260,6 +270,7 @@ public class CoinFlipP extends JPanel {
         return button;
     }
 
+    // Method to simulate coin flip
     private boolean flipCoin() {
         return rand.nextInt(2) == 0;
     }
