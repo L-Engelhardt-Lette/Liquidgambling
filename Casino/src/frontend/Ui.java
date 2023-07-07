@@ -120,7 +120,6 @@ public class Ui {
                 for (User user : reading) {
                     if (user.getUserName().equals(loginUsername.getText()) && user.getPassword().equals(loginPassword.getText())) {
                         Zentrale.getInstance().setActiveUser(user);
-                        JOptionPane.showMessageDialog(null,"Done");
                         userLoginCorrect = true;
                     }
                 }
