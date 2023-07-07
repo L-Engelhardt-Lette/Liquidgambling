@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -36,9 +38,9 @@ public class SettingUi extends JOptionPane {
         JLabel settingUiResolution = new JLabel("Resolution");
         settingUiResolution.setForeground(Color.white);
         JPanel settingUiResolutionPanel = new JPanel();
-        JButton settingUiFullHd = new JButton();
-        JButton settingUiWqHd = new JButton();
-        JButton settingUiBack = new JButton();
+        JLabel settingUiFullHd = new JLabel();
+        JLabel settingUiWqHd = new JLabel();
+        JLabel settingUiBack = new JLabel();
 
         settingUiResolutionPanel.add(settingUiFullHd);
         settingUiResolutionPanel.add(settingUiWqHd);
@@ -51,18 +53,12 @@ public class SettingUi extends JOptionPane {
 
         settingUiFullHd.setIcon(FullHdIcon);
         settingUiFullHd.setOpaque(false);
-        settingUiFullHd.setContentAreaFilled(false);
-        settingUiFullHd.setBorderPainted(false);
 
         settingUiWqHd.setIcon(WQHDIcon);
         settingUiWqHd.setOpaque(false);
-        settingUiWqHd.setContentAreaFilled(false);
-        settingUiWqHd.setBorderPainted(false);
 
         settingUiBack.setIcon(backIcon);
         settingUiBack.setOpaque(false);
-        settingUiBack.setContentAreaFilled(false);
-        settingUiBack.setBorderPainted(false);
 
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
@@ -83,9 +79,10 @@ public class SettingUi extends JOptionPane {
             // TODO: Adjust the loudness of the background music based on the volume value
         });
 
-        settingUiBack.addActionListener(new ActionListener() {
+        settingUiBack.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mousePressed(MouseEvent e) {
                 settingUiFrame.dispose();
             }
         });
