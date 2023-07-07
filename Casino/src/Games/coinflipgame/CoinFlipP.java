@@ -1,6 +1,5 @@
 package Games.coinflipgame;
 
-import Backend.Zentrale;
 import frontend.extraUi.SettingUi;
 
 import javax.swing.*;
@@ -48,9 +47,7 @@ public class CoinFlipP extends JPanel {
                 String text = source.getText();
                 int i = Integer.parseInt(text);
                 betAmount += i;
-                System.out.println(betAmount);
-                betlabel.setText("Im POT" + betAmount);
-
+                betAmountLabel.setText("Im Pot: " + betAmount);
             }
         };
 
