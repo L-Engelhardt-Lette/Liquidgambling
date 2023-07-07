@@ -1,5 +1,6 @@
 package Games.coinflipgame;
 
+import Backend.Zentrale;
 import frontend.extraUi.SettingUi;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class CoinFlipP extends JPanel {
@@ -21,52 +23,13 @@ public class CoinFlipP extends JPanel {
     private JButton sevenButton;
     private JButton dropButton;
 
-    private int balance;
+    private int balance = Zentrale.getInstance().getActiveUser().getUser_Pearl();
     private int betAmount = 0;
 
     public CoinFlipP() {
         setOpaque(false); // Set the panel to be transparent
         setLayout(new GridBagLayout());
 
-        // Load images
-        headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
-        tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
-
-        JLabel coinLabel = new JLabel();
-        coinLabel.setBackground(new Color(0, 0, 0, 0));
-        coinLabel.setIcon(headsIcon);  // Set initial image
-
-        JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
-
-        sevenButton = createButton("Seven", Color.RED);
-        dropButton = createButton("Drop", Color.BLACK);
-
-        sevenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sevenButton.setBackground(Color.WHITE);
-                sevenButton.setForeground(Color.black);
-                dropButton.setBackground(Color.BLACK);
-                dropButton.setForeground(Color.WHITE);
-            }
-        });
-
-        dropButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sevenButton.setBackground(Color.RED);
-                dropButton.setBackground(Color.WHITE);
-                dropButton.setForeground(Color.black);
-            }
-        });
-
-        JTextField betField = new JTextField();
-        JLabel resultLabel = new JLabel();
-        resultLabel.setForeground(Color.WHITE); // Set text color to white
-
-
-        coinSelectPanel.add(sevenButton);
-        coinSelectPanel.add(dropButton);
 
         JPanel betAmountPanel = new JPanel(new GridLayout(2, 3));
 
@@ -76,7 +39,7 @@ public class CoinFlipP extends JPanel {
         JButton betAmountButton4 = new JButton("-5");
         JButton betAmountButton5 = new JButton("-10");
         JButton betAmountButton6 = new JButton("-100");
-
+        JLabel betlabel = new JLabel();
 
         ActionListener listener = new ActionListener() {
             @Override
@@ -85,7 +48,8 @@ public class CoinFlipP extends JPanel {
                 String text = source.getText();
                 int i = Integer.parseInt(text);
                 betAmount += i;
-                System.out.println("Im Pot: " + betAmount);
+                System.out.println(betAmount);
+                betlabel.setText("Im POT" + betAmount);
 
             }
         };
@@ -104,36 +68,43 @@ public class CoinFlipP extends JPanel {
         betAmountPanel.add(betAmountButton4);
         betAmountPanel.add(betAmountButton5);
         betAmountPanel.add(betAmountButton6);
+        // Load images
+        headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
+        tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
 
+        JLabel coinLabel = new JLabel();
+
+        coinLabel.setBackground(new Color(0, 0, 0, 0));
+        coinLabel.setIcon(headsIcon);  // Set initial image
+
+        JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
+
+
+
+
+        JLabel resultLabel = new JLabel();
         JLabel coinFlipBet = new JLabel();
-        Icon betIcon = new ImageIcon("Casino/src/frontend/img/extraUiButtons/Bet.png");
-        coinFlipBet.setIcon(betIcon);
-        coinFlipBet.setOpaque(false);
-        coinFlipBet.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                //TODO: Chris soll mal was machen
-            }
-        });
-        coinFlipBet.addMouseListener(new MouseAdapter() {
+        sevenButton = createButton("Seven", Color.RED);
+        dropButton = createButton("Drop", Color.BLACK);
 
+        sevenButton.addActionListener(new ActionListener() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                String betText = betField.getText();
+            public void actionPerformed(ActionEvent e) {
+                String betText = betlabel.getText();
                 if (betText.isEmpty()) {
-                    resultLabel.setText("Please enter a bet amount.");
+                    System.out.println("Please enter a bet amount.");
                     return;
                 }
                 int bet;
                 try {
-                    bet = Integer.parseInt(betText);
+                    bet = betAmount;
                 } catch (NumberFormatException ex) {
-                    resultLabel.setText("Invalid bet amount!");
+                    System.out.println("Invalid bet amount!");
                     return;
                 }
 
                 if (bet > balance) {
-                    resultLabel.setText("Insufficient balance!");
+                    System.out.println("Insufficient balance!");
                 } else {
                     coinFlipBet.setEnabled(false);  // Disable button during animation
 
@@ -153,11 +124,11 @@ public class CoinFlipP extends JPanel {
 
                                 boolean win = flipCoin();
                                 if (win) {
-                                    balance += bet;
-                                    resultLabel.setText("You won! New balance: " + balance);
+                                    Zentrale.getInstance().getActiveUser().plus(bet);
+                                   System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 } else {
-                                    balance -= bet;
-                                    resultLabel.setText("You lost! New balance: " + balance);
+                                    Zentrale.getInstance().getActiveUser().minus(bet);
+                                   System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 }
                             }
                         }
@@ -165,8 +136,97 @@ public class CoinFlipP extends JPanel {
 
                     timer.start();
                 }
+
+
+
+                sevenButton.setBackground(Color.WHITE);
+                sevenButton.setForeground(Color.black);
+                dropButton.setBackground(Color.BLACK);
+                dropButton.setForeground(Color.WHITE);
             }
         });
+
+        dropButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sevenButton.setBackground(Color.RED);
+                dropButton.setBackground(Color.WHITE);
+                dropButton.setForeground(Color.black);
+            }
+        });
+
+        //JTextField betField = new JTextField();
+        //JLabel resultLabel = new JLabel();
+        resultLabel.setForeground(Color.WHITE); // Set text color to white
+
+
+        coinSelectPanel.add(sevenButton);
+        coinSelectPanel.add(dropButton);
+
+
+
+        //JLabel coinFlipBet = new JLabel();
+        Icon betIcon = new ImageIcon("Casino/src/frontend/img/extraUiButtons/Bet.png");
+//        coinFlipBet.setIcon(betIcon);
+//        coinFlipBet.setOpaque(false);
+//        coinFlipBet.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                //TODO: Chris soll mal was machen
+//            }
+//        });
+//        coinFlipBet.addMouseListener(new MouseAdapter() {
+//
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                String betText = betField.getText();
+//                if (betText.isEmpty()) {
+//                    resultLabel.setText("Please enter a bet amount.");
+//                    return;
+//                }
+//                int bet;
+//                try {
+//                    bet = Integer.parseInt(betText);
+//                } catch (NumberFormatException ex) {
+//                    resultLabel.setText("Invalid bet amount!");
+//                    return;
+//                }
+//
+//                if (bet > balance) {
+//                    resultLabel.setText("Insufficient balance!");
+//                } else {
+//                    coinFlipBet.setEnabled(false);  // Disable button during animation
+//
+//                    // Start flip animation
+//                    Timer timer = new Timer(100, new ActionListener() {
+//                        private int count = 0;
+//
+//                        @Override
+//                        public void actionPerformed(ActionEvent e) {
+//                            if (count < 10) {
+//                                coinLabel.setIcon(count % 2 == 0 ? headsIcon : tailsIcon);
+//                                count++;
+//                                repaint(); // Trigger repaint
+//                            } else {
+//                                ((Timer) e.getSource()).stop();  // Stop the animation
+//                                coinFlipBet.setEnabled(true);  // Enable button after animation
+//
+//                                boolean win = flipCoin();
+//                                if (win) {
+//                                    balance += bet;
+//                                    resultLabel.setText("You won! New balance: " + balance);
+//                                } else {
+//                                    balance -= bet;
+//                                    resultLabel.setText("You lost! New balance: " + balance);
+//                                }
+//                            }
+//                        }
+//                    });
+//
+//                    timer.start();
+//                }
+//            }
+//        });
 
 
         coinFlipBet.addMouseListener(new MouseAdapter() {

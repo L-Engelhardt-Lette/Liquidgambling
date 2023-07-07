@@ -415,6 +415,7 @@ public class Ui {
         startUser.setBorderPainted(false);
 
         //Anzeige für die Pearl Balance
+        startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
         startPearlCount.setForeground(Color.WHITE);
         startPearlCount.setHorizontalAlignment(SwingConstants.RIGHT);
         startPearlCount.setAlignmentY(Component.CENTER_ALIGNMENT);
