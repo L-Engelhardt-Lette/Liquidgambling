@@ -28,7 +28,7 @@ public class CoinFlipP extends JPanel {
 
     public CoinFlipP() {
         setOpaque(false); // Set the panel to be transparent
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
 
         // Load images
         headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
@@ -44,12 +44,14 @@ public class CoinFlipP extends JPanel {
         JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
         JLabel betField = new JLabel();
         JLabel resultLabel = new JLabel();
+        JPanel betAmountButtonsPanel = new JPanel(new GridLayout(2, 4));
+        JPanel coinFlipPanel = new JPanel(new GridBagLayout());
+
 
         // Sucht die Fonts für das Programm
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
-            Font mainfont = font.deriveFont(50f);
-            coinLabel.setFont(mainfont);
+            Font mainfont = font.deriveFont(40f);
             betAmountLabel.setFont(mainfont);
 
         } catch (FontFormatException | IOException a) {
@@ -85,20 +87,21 @@ public class CoinFlipP extends JPanel {
         });
 
 
-        resultLabel.setForeground(Color.WHITE); // Set text color to white
-
-
         coinSelectPanel.add(sevenButton);
         coinSelectPanel.add(dropButton);
 
-        JPanel betAmountButtonsPanel = new JPanel(new GridLayout(2, 3));
 
         JButton betAmountButton1 = new JButton("+5");
         JButton betAmountButton2 = new JButton("+10");
         JButton betAmountButton3 = new JButton("+100");
-        JButton betAmountButton4 = new JButton("-5");
-        JButton betAmountButton5 = new JButton("-10");
-        JButton betAmountButton6 = new JButton("-100");
+        JButton betAmountButton4 = new JButton("Max");
+        JButton betAmountButton5 = new JButton("-5");
+        JButton betAmountButton6 = new JButton("-10");
+        JButton betAmountButton7 = new JButton("-100");
+        JButton betAmountButton8 = new JButton("Reset");
+
+        betAmountLabel.setForeground(Color.WHITE);
+        betAmountLabel.setText("Im Pot: " + betAmount);
 
 
         ActionListener listener = new ActionListener() {
@@ -116,9 +119,22 @@ public class CoinFlipP extends JPanel {
         betAmountButton1.addActionListener(listener);
         betAmountButton2.addActionListener(listener);
         betAmountButton3.addActionListener(listener);
-        betAmountButton4.addActionListener(listener);
         betAmountButton5.addActionListener(listener);
         betAmountButton6.addActionListener(listener);
+        betAmountButton7.addActionListener(listener);
+
+        betAmountButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        betAmountButton8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         betAmountButtonsPanel.add(betAmountButton1);
         betAmountButtonsPanel.add(betAmountButton2);
@@ -192,32 +208,18 @@ public class CoinFlipP extends JPanel {
 
             }
         });
-
-        JPanel coinFlipPanel = new JPanel(new GridBagLayout());
+        //coinFlipPanel Settings
         coinFlipPanel.setOpaque(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add some vertical spacing between components
-
-        coinFlipPanel.add(coinLabel, gbc);
-
-        gbc.gridy = 1;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
-        coinFlipPanel.add(betAmountLabel, gbc);
-
-        gbc.gridy = 2;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
-        coinFlipPanel.add(betAmountButtonsPanel, gbc);
-
-        gbc.gridy = 3;
-        coinFlipPanel.add(coinFlipBet, gbc);
+        coinFlipPanel.add(coinLabel, new GridBagConstraints(1, 1, 2, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(betAmountLabel, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(1, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(betAmountButtonsPanel, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(1, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(coinSelectPanel, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
 
 
 
-        add(coinFlipPanel);
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        add(coinFlipPanel, BorderLayout.CENTER);
     }
 
     private JButton createButton(String text, Color color) {
