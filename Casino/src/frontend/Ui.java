@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 // Marek weiß gar nichts über java frontend
 
+//Die beste Ui die es nur geben kann
+
 public class Ui {
 
     private final JLabel startPearlCount;
@@ -36,7 +38,7 @@ public class Ui {
         JLabel loginButton = new JLabel();
         JLabel loginRegister = new JLabel();
         JPanel loginBackground = new JPanel(){
-            protected void paintComponent(Graphics grphcs) {
+            protected void paintComponent(Graphics grphcs) {  //Gradiant für den LoginBackground
                 super.paintComponent(grphcs);
                 Graphics2D g2d = (Graphics2D) grphcs;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -51,9 +53,10 @@ public class Ui {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-
         loginUi.setContentPane(loginBackground);
 
+
+        //Login einfabe Felder
         JTextField loginUsername = new JTextField("LEDEAdmin");
         loginUsername.setPreferredSize(new Dimension(300, 40));
         loginUsername.addMouseListener(new MouseAdapter() {
@@ -71,17 +74,18 @@ public class Ui {
             }
         });
 
+
         // Icon für den Login Button
         Icon loginicon = new ImageIcon("Casino/src/frontend/img/loginButton/login256.png");
         loginButton.setIcon(loginicon);
         loginButton.setOpaque(false);
-//        loginButton.setContentAreaFilled(false);
-//        loginButton.setBorderPainted(false);
+
 
         // Icon für den Register Button
         Icon registericon = new ImageIcon("Casino/src/frontend/img/loginButton/register128.png");
         loginRegister.setIcon(registericon);
         loginRegister.setOpaque(false);
+
 
         // Vorgaben für das Login Fenster
         loginUi.setSize(800, 600);
@@ -94,9 +98,11 @@ public class Ui {
         int windowY = Math.max(0, (screenSize.height - windowSize.height) / 2);
         loginUi.setLocation(windowX, windowY);
 
+
         //Panel transparent machen
         loginMain.setBackground(new Color(0,0,0,0));
         loginCenterPanel.setBackground(new Color(0,0,0,0));
+
 
         // Grid-bagLayout Einstellungen und Zuweisung der Elemente zu dem Center Panel
         loginCenterPanel.add(loginLogoLabel, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
@@ -105,10 +111,12 @@ public class Ui {
         loginCenterPanel.add(loginButton, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
         loginCenterPanel.add(loginRegister, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 0, 0), 0, 0));
 
+
         // Zuweisung von Hauptelementen zu dem Login Frame
         loginMain.add(loginCenterPanel, BorderLayout.CENTER);
         loginUi.add(loginMain);
         loginUi.setVisible(true);
+
 
         // Zuweisung was der Login Button macht
         loginButton.addMouseListener(new MouseAdapter() {
@@ -134,6 +142,8 @@ public class Ui {
             }
         });
 
+
+        //Erstellung und öffnung der Register Page
         loginRegister.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -144,7 +154,7 @@ public class Ui {
                 JLabel registerButton = new JLabel();
                 JLabel registerBack = new JLabel();
                 JPanel registerBackgroundPanel = new JPanel(){
-                    protected void paintComponent(Graphics grphcs) {
+                    protected void paintComponent(Graphics grphcs) { // Gradiant Background
                         super.paintComponent(grphcs);
                         Graphics2D g2d = (Graphics2D) grphcs;
                         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -160,6 +170,8 @@ public class Ui {
                     }
                 };
 
+
+                //Erstellung der Textfelder mit anhängender Funktion
                 JTextField registerUsername = new JTextField("Username");
                 registerUsername.setPreferredSize(new Dimension(300, 40));
                 registerUsername.addMouseListener(new MouseAdapter() {
@@ -168,6 +180,7 @@ public class Ui {
                         registerUsername.setText("");
                     }
                 });
+
                 JTextField registerPassword = new JTextField("Password");
                 registerPassword.setPreferredSize(new Dimension(300, 40));
                 registerPassword.addMouseListener(new MouseAdapter() {
@@ -176,6 +189,7 @@ public class Ui {
                         registerPassword.setText("");
                     }
                 });
+
                 JTextField registerAlter = new JTextField("Alter");
                 registerAlter.setPreferredSize(new Dimension(300, 40));
                 registerAlter.addMouseListener(new MouseAdapter() {
@@ -185,6 +199,8 @@ public class Ui {
                     }
                 });
 
+
+                //Zuweisung der Icons für die Buttons
                 Icon registerIcon256 = new ImageIcon("Casino/src/frontend/img/loginButton/register256.png");
                 registerButton.setIcon(registerIcon256);
                 registerButton.setOpaque(false);
@@ -193,6 +209,8 @@ public class Ui {
                 registerBack.setIcon(backIcon);
                 registerBack.setOpaque(false);
 
+
+                //Zuweisung der Elemente per GridBag zu dem Register Panel
                 registerPanel.add(registerLogo, new GridBagConstraints(1, 1, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 registerPanel.add(registerUsername, new GridBagConstraints(1, 2, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 registerPanel.add(registerPassword, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
@@ -200,23 +218,28 @@ public class Ui {
                 registerPanel.add(registerButton, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
                 registerPanel.add(registerBack, new GridBagConstraints(1, 6, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
 
+
+                //Register Background und Layout settings
                 registerMain.setBackground(new Color(0,0,0,0));
                 registerPanel.setBackground(new Color(0,0,0,0));
 
                 registerBackgroundPanel.add(registerPanel);
                 registerMain.add(registerBackgroundPanel, BorderLayout.CENTER);
 
+
+                //Wenn Register aufgerufen wird, entfernung der Ui und erstellung der neuen UI
                 loginUi.remove(loginMain);
                 loginUi.add(registerMain);
                 loginUi.revalidate();
                 loginUi.revalidate();
                 loginUi.repaint();
 
-                registerButton.addMouseListener(new MouseAdapter() {
 
+                //Register Button action
+                registerButton.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        try {
+                        try { //Check ob die angegeben daten ok sind und die Schreibung von einem neuen User in der Datenbank
                             ArrayList<User> reading = Persistenz.reading();
                             User register_user = new User(registerUsername.getText(), registerAlter.getText(), registerPassword.getText());
 
@@ -248,8 +271,8 @@ public class Ui {
                 });
 
 
+                //Backbutton zur LoginPage
                 registerBack.addMouseListener(new MouseAdapter() {
-
                     @Override
                     public void mousePressed(MouseEvent e) {
                         loginUi.remove(registerMain);
@@ -259,15 +282,15 @@ public class Ui {
                     }
                 });
             }
-
         });
     }
 
-
+    //Main Ui Part
     public Ui() {
 
+        //Erstellung der Elemente
         JFrame startFrame = new JFrame();
-        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
+        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         startFrame.setUndecorated(true);
         JLabel startNameLogo = new JLabel();
@@ -278,7 +301,7 @@ public class Ui {
         JLabel startCoinflipLable = new JLabel();
         JLabel startPokerLable = new JLabel();
         JLabel startSlotsLable = new JLabel();
-        startPearlCount = new JLabel() {
+        startPearlCount = new JLabel() { // Aktualisirung des Pearlcounts
             @Override
             public String getText() {
                 return Zentrale.getInstance().getActiveUser().getUser_Pearl_String();
@@ -288,7 +311,7 @@ public class Ui {
         JButton startUser = new JButton();
 
 
-        // ActionListener
+        // ActionListener um die Setings zu öffnen
         startSetting.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -297,6 +320,8 @@ public class Ui {
                 settingUi.setVisible(true);
             }
         });
+
+        // ActionListener um die UUserUi zu öffnen
         startUser.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -316,6 +341,7 @@ public class Ui {
         } catch (FontFormatException | IOException a) {
             a.printStackTrace();
         }
+
         //Font für die anderen texte die mittelgroß sein sollen
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
@@ -326,6 +352,7 @@ public class Ui {
         } catch (FontFormatException | IOException a) {
             a.printStackTrace();
         }
+
         //Font für die anderen texte die kleiner sein sollen
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
@@ -335,6 +362,8 @@ public class Ui {
             a.printStackTrace();
         }
 
+
+        //Erstellung des Background Img für die Ui
         JPanelWithBackground backgroundPanel = new JPanelWithBackground("Casino/src/frontend/img/Background/bgImg.jpg");
         backgroundPanel.setLayout(new BorderLayout());
         startFrame.setContentPane(backgroundPanel);
@@ -350,6 +379,9 @@ public class Ui {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
+
+
+        //Setting für die Obere Anzeige
         startTopPanel.setOpaque(false);
         JPanel startMainPanel = new JPanel(new GridBagLayout());
         startMainPanel.setOpaque(false);
@@ -357,6 +389,7 @@ public class Ui {
         startLogoNamePanel.setOpaque(false);
         JPanel startTopRightPanel = new JPanel(new GridBagLayout());
         startTopRightPanel.setOpaque(false);
+
 
         //Icons für die Game buttons
         Icon pokericon = new ImageIcon("Casino/src/frontend/img/gameButtons/poker512.png");
@@ -370,6 +403,7 @@ public class Ui {
         Icon coinflipicon = new ImageIcon("Casino/src/frontend/img/gameButtons/coinflip512.png");
         startCoinflip.setIcon(coinflipicon);
         startCoinflip.setOpaque(false);
+
 
         //Die Buttons die zum game führen
         JPanel startPokerPanel = new JPanel(new GridLayout(2, 1));
@@ -385,26 +419,30 @@ public class Ui {
         startCoinflipPanel.add(startCoinflipLable);
         startCoinflipPanel.setOpaque(false);
 
+
         //Gridbaglayout
         startMainPanel.add(startPokerPanel, new GridBagConstraints(1, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(300, 200, 0, -200), 0, 0));
         startMainPanel.add(startSlotsPanel, new GridBagConstraints(2, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(300, -200, 0, -200), 0, 0));
         startMainPanel.add(startCoinflipPanel, new GridBagConstraints(3, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(300, -200, 0, 200), 0, 0));
 
+
         //Home Button
         Icon logoIcon = new ImageIcon("Casino/src/frontend/img/Logo/LogoLable.png");
-        //startNameLogo.addActionListener(clickToGoHome); //TODO: Home Button Actionlistener adden
         startNameLogo.setIcon(logoIcon);
         startNameLogo.setOpaque(false);
+
 
         //Pearl Icon
         Icon pearlIcon = new ImageIcon("Casino/src/frontend/img/Logo/pearl64px.png");
         startPearlLogo.setIcon(pearlIcon);
         startPearlLogo.setHorizontalAlignment(SwingConstants.CENTER);
 
+
         //Setting Button
         Icon settingIcon = new ImageIcon("Casino/src/frontend/img/Logo/setting64px.png");
         startSetting.setIcon(settingIcon);
         startSetting.setOpaque(false);
+
 
         //User Button
         Icon userIcon = new ImageIcon("Casino/src/frontend/img/Logo/user64px.png");
@@ -412,6 +450,7 @@ public class Ui {
         startUser.setOpaque(false);
         startUser.setContentAreaFilled(false);
         startUser.setBorderPainted(false);
+
 
         //Anzeige für die Pearl Balance
         startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
@@ -424,15 +463,19 @@ public class Ui {
         //Zuweisung von Items zu dem LogoNamePanel
         startLogoNamePanel.add(startNameLogo);
 
+
         //Zuweisung von items zu dem TopRightPanel wie settings etc
         startTopRightPanel.add(startPearlCount, new GridBagConstraints(1, 1, 2, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 0, 0, 0), 0, 0));
         startTopRightPanel.add(startPearlLogo, new GridBagConstraints(3, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
         startTopRightPanel.add(startSetting, new GridBagConstraints(4, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
         startTopRightPanel.add(startUser, new GridBagConstraints(5, 1, 1, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 10), 0, 0));
 
+
         //Zuweisung der PanelGroups zum Programm Header (TopPanel)
         startTopPanel.add(startTopRightPanel, BorderLayout.EAST);
         startTopPanel.add(startLogoNamePanel, BorderLayout.WEST);
+
+
         //Zuweisung der panel zu frame
         startFrame.add(startTopPanel, BorderLayout.NORTH);
         startFrame.add(startMainPanel, BorderLayout.CENTER);
@@ -441,14 +484,14 @@ public class Ui {
         //Start Frame Stuff
         startFrame.setVisible(true);
 
-
+        //Start des Poker games
         startPoker.addMouseListener(new MouseAdapter() {
 
-                                        @Override
-                                        public void mousePressed(MouseEvent e) {
-                                            JPanel pokerPanel = new JPanel();
+        @Override
+        public void mousePressed(MouseEvent e) {
+        JPanel pokerPanel = new JPanel();
 
-                                            //Backbutton
+        //Backbutton
                                             JLabel backButton = new JLabel();
                                             Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
                                             backButton.setIcon(backIcon);
@@ -478,6 +521,8 @@ public class Ui {
                                         }
                                     });
 
+
+        //Start des Coinflipgames
         startCoinflip.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -516,6 +561,9 @@ public class Ui {
                 startFrame.repaint();
             }
         });
+
+
+        //Start des Slotgames
         startSlots.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -545,11 +593,15 @@ public class Ui {
 
     }
 
+
+    //Methode um den Pearlcount zu updaten
     public void update() {
         startPearlCount.repaint();
 
     }
 
+
+    //Erstellung des Beackground über ein BufferedImg
     public static class JPanelWithBackground extends JPanel {
         private BufferedImage backgroundImage;
 
@@ -575,6 +627,8 @@ public class Ui {
         }
     }
 
+
+    //Erstellung des Logo vom Casino
     private static JLabel createLogoLabel() {
         // Load the logo image from a local file
         BufferedImage logoImage = null;
