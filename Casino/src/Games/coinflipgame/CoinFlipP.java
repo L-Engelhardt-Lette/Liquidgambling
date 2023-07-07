@@ -168,18 +168,8 @@ public class CoinFlipP extends JPanel {
             }
         });
 
-        JLabel coinFlipBack = new JLabel();
-        Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
-        coinFlipBack.setIcon(backIcon);
-        coinFlipBack.setOpaque(false);
-        coinFlipBack.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                //TODO: Chris soll mal was machen
-            }
-        });
 
-        coinFlipBack.addMouseListener(new MouseAdapter() {
+        coinFlipBet.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(MouseEvent e) {
@@ -208,8 +198,7 @@ public class CoinFlipP extends JPanel {
         gbc.gridy = 3;
         coinFlipPanel.add(coinFlipBet, gbc);
 
-        gbc.gridy = 4;
-        coinFlipPanel.add(coinFlipBack, gbc);
+
 
         add(coinFlipPanel);
         setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));

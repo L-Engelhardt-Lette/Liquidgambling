@@ -447,9 +447,16 @@ public class Ui {
                                         @Override
                                         public void mousePressed(MouseEvent e) {
                                             JPanel pokerPanel = new JPanel();
-                                            JButton back = new JButton("BACK");
-                                            back.addMouseListener(new MouseAdapter() {
 
+                                            //Backbutton
+                                            JLabel backButton = new JLabel();
+                                            Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+                                            backButton.setIcon(backIcon);
+                                            backButton.setOpaque(false);
+                                            JPanel backPanel = new JPanel(new GridBagLayout());
+                                            backPanel.setBackground(new Color(0,0,0,0));
+                                            backPanel.add(backButton);
+                                            backButton.addMouseListener(new MouseAdapter() {
                                                 @Override
                                                 public void mousePressed(MouseEvent e) {
                                                     startFrame.remove(pokerPanel);
@@ -459,7 +466,10 @@ public class Ui {
                                                     startFrame.repaint();
                                                 }
                                             });
-                                            pokerPanel.add(back);
+
+
+                                            pokerPanel.add(backPanel, BorderLayout.SOUTH);
+
                                             startFrame.remove(startMainPanel);
                                             startFrame.add(pokerPanel, BorderLayout.CENTER);
                                             startFrame.revalidate();
@@ -473,10 +483,17 @@ public class Ui {
             @Override
             public void mousePressed(MouseEvent e) {
                 CoinFlipP coinflipPanel = new CoinFlipP();
-                JButton back = new JButton("BACK");
                 JPanel coinflipMainPanel = new JPanel();
-                back.addMouseListener(new MouseAdapter() {
 
+                //Backbutton
+                JLabel backButton = new JLabel();
+                Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+                backButton.setIcon(backIcon);
+                backButton.setOpaque(false);
+                JPanel backPanel = new JPanel(new GridBagLayout());
+                backPanel.setBackground(new Color(0,0,0,0));
+                backPanel.add(backButton);
+                backButton.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         startFrame.remove(coinflipMainPanel);
@@ -486,11 +503,13 @@ public class Ui {
                         startFrame.repaint();
                     }
                 });
+
+
                 coinflipPanel.setBackground(new Color(0,0,0,0));
                 coinflipMainPanel.setBackground(new Color(0,0,0,0));
                 coinflipMainPanel.setLayout(new BorderLayout());
                 coinflipMainPanel.add(coinflipPanel, BorderLayout.CENTER);
-                coinflipMainPanel.add(back, BorderLayout.SOUTH);
+                coinflipMainPanel.add(backPanel, BorderLayout.SOUTH);
                 startFrame.remove(startMainPanel);
                 startFrame.add(coinflipMainPanel, BorderLayout.CENTER);
                 startFrame.revalidate();
@@ -501,7 +520,25 @@ public class Ui {
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                //Backbutton
+                JLabel backButton = new JLabel();
+                Icon backIcon = new ImageIcon("Casino/src/frontend/img/loginButton/back200.png");
+                backButton.setIcon(backIcon);
+                backButton.setOpaque(false);
+                JPanel backPanel = new JPanel(new GridBagLayout());
+                backPanel.setBackground(new Color(0,0,0,0));
+                backPanel.add(backButton);
+                backButton.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        startFrame.remove(startSlots);
+                        startFrame.add(startMainPanel, BorderLayout.CENTER);
+                        startFrame.revalidate();
+                        startFrame.revalidate();
+                        startFrame.repaint();
+                    }
+                });
+                startSlots.add(backPanel, BorderLayout.SOUTH);
 
             }
         });
