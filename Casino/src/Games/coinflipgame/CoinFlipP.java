@@ -1,4 +1,5 @@
 // Package declaration
+//TODO: ARTIFACTS FIXEN BITTE FRONTEND MEISTER.
 package Games.coinflipgame;
 
 // Import statements
@@ -44,6 +45,8 @@ public class CoinFlipP extends JPanel {
         JButton betAmountButton4 = new JButton("-5");
         JButton betAmountButton5 = new JButton("-10");
         JButton betAmountButton6 = new JButton("-100");
+
+        //TODO: betlabel hat funktionen und soll den Bet amount zeigen können aber ist noch null optisch eingestellt
         JLabel betlabel = new JLabel();
 
         // ActionListener for bet amount buttons
@@ -75,8 +78,8 @@ public class CoinFlipP extends JPanel {
         betAmountPanel.add(betAmountButton6);
 
         // Load images for coin icons
-        headsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
-        tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
+        tailsIcon = new ImageIcon("Casino/src/frontend/img/coin/seven300.png");
+        headsIcon = new ImageIcon("Casino/src/frontend/img/coin/waterdrop300.png");
 
         JLabel coinLabel = new JLabel();
 
@@ -85,6 +88,7 @@ public class CoinFlipP extends JPanel {
 
         JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
 
+        //TODO: resultLabel wird noch nicht verwendet und muss inplementiert werden.
         JLabel resultLabel = new JLabel();
         JLabel coinFlipBet = new JLabel();
         sevenButton = createButton("Seven", Color.RED);
@@ -100,6 +104,7 @@ public class CoinFlipP extends JPanel {
                 Random random =  new Random();
                 boolean r = random.nextBoolean();
                 boolean gewonnen = r == sevenWasClicked;
+                //TODO: Beide unteren S.o.p müssen im finalen Release entfernt werden.
                 System.out.println(r);
                 System.out.println(gewonnen);
                 String betText = betlabel.getText();
@@ -135,12 +140,22 @@ public class CoinFlipP extends JPanel {
                                 ((Timer) e.getSource()).stop();  // Stop the animation
                                 coinFlipBet.setEnabled(true);  // Enable button after animation
 
-
-                                if (gewonnen) {
+                               //TODO: Icon muss rictiges ergebnis wiederspiegeln
+                                if (gewonnen&& sevenWasClicked) {
+                                    coinLabel.setIcon(tailsIcon);
                                     Zentrale.getInstance().getActiveUser().plus(bet);
+                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
                                     System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
-                                } else {
+                                }
+                                if (gewonnen&& !sevenWasClicked) {
+                                    coinLabel.setIcon(headsIcon);
+                                    Zentrale.getInstance().getActiveUser().plus(bet);
+                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
+                                    System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                }
+                                 else {
                                     Zentrale.getInstance().getActiveUser().minus(bet);
+                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
                                     System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
                                 }
                             }

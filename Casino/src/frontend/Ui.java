@@ -451,7 +451,7 @@ public class Ui {
         startUser.setContentAreaFilled(false);
         startUser.setBorderPainted(false);
 
-
+        //TODO: Die Standard größe erhöhen.
         //Anzeige für die Pearl Balance
         startPearlCount.setText(Zentrale.getInstance().getActiveUser().getUser_Pearl_String());
         startPearlCount.setForeground(Color.WHITE);
