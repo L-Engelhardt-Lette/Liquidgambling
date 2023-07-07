@@ -95,6 +95,7 @@ public class SettingUi extends JOptionPane {
             JSlider source = (JSlider) e.getSource();
             int volume = source.getValue();
             // TODO: Adjust the loudness of the background music based on the volume value
+            //Noch keine musik
         });
 
         // Add a mouse listener to the back button to close the settings UI

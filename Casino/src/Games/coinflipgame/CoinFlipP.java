@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 // Class declaration
@@ -46,8 +48,20 @@ public class CoinFlipP extends JPanel {
         JButton betAmountButton5 = new JButton("-10");
         JButton betAmountButton6 = new JButton("-100");
 
-        //TODO: betlabel hat funktionen und soll den Bet amount zeigen können aber ist noch null optisch eingestellt
-        JLabel betlabel = new JLabel();
+        JLabel betlabel = new JLabel("Im Pot: " + betAmount);
+        betlabel.setForeground(Color.white);
+        JLabel resultLabel = new JLabel("RESULT");
+        resultLabel.setForeground(Color.white);
+
+        //Font für die anderen texte die kleiner sein sollen
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Casino/src/frontend/font/Watermelon.ttf"));
+            Font smallfont = font.deriveFont(40f);
+            resultLabel.setFont(smallfont);
+            betlabel.setFont(smallfont);
+        } catch (FontFormatException | IOException a) {
+            a.printStackTrace();
+        }
 
         // ActionListener for bet amount buttons
         ActionListener listener = new ActionListener() {
@@ -88,8 +102,7 @@ public class CoinFlipP extends JPanel {
 
         JPanel coinSelectPanel = new JPanel(new GridLayout(1, 2));
 
-        //TODO: resultLabel wird noch nicht verwendet und muss inplementiert werden.
-        JLabel resultLabel = new JLabel();
+
         JLabel coinFlipBet = new JLabel();
         sevenButton = createButton("Seven", Color.RED);
         dropButton = createButton("Drop", Color.BLACK);
@@ -104,9 +117,6 @@ public class CoinFlipP extends JPanel {
                 Random random =  new Random();
                 boolean r = random.nextBoolean();
                 boolean gewonnen = r == sevenWasClicked;
-                //TODO: Beide unteren S.o.p müssen im finalen Release entfernt werden.
-                System.out.println(r);
-                System.out.println(gewonnen);
                 String betText = betlabel.getText();
                 if (betText.isEmpty()) {
                     System.out.println("Please enter a bet amount.");
@@ -140,23 +150,28 @@ public class CoinFlipP extends JPanel {
                                 ((Timer) e.getSource()).stop();  // Stop the animation
                                 coinFlipBet.setEnabled(true);  // Enable button after animation
 
-                               //TODO: Icon muss rictiges ergebnis wiederspiegeln
                                 if (gewonnen&& sevenWasClicked) {
                                     coinLabel.setIcon(tailsIcon);
                                     Zentrale.getInstance().getActiveUser().plus(bet);
-                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
-                                    System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    resultLabel.setText("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    revalidate();
+                                    revalidate();
+                                    repaint();
                                 }
                                 if (gewonnen&& !sevenWasClicked) {
                                     coinLabel.setIcon(headsIcon);
                                     Zentrale.getInstance().getActiveUser().plus(bet);
-                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
-                                    System.out.println("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    resultLabel.setText("You won! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    revalidate();
+                                    revalidate();
+                                    repaint();
                                 }
                                  else {
                                     Zentrale.getInstance().getActiveUser().minus(bet);
-                                    //TODO: S.o.p muss durch Resultlabel umgestellt werden
-                                    System.out.println("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    resultLabel.setText("You lost! New balance: " + Zentrale.getInstance().getActiveUser().getUser_Pearl());
+                                    revalidate();
+                                    revalidate();
+                                    repaint();
                                 }
                             }
                         }
@@ -196,31 +211,18 @@ public class CoinFlipP extends JPanel {
 
 
         // Create the coin flip panel
-
         JPanel coinFlipPanel = new JPanel(new GridBagLayout());
         coinFlipPanel.setOpaque(false);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add some vertical spacing between components
 
-        coinFlipPanel.add(coinLabel, gbc);
+        coinFlipPanel.add(coinLabel, new GridBagConstraints(1, 1, 2, 2, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(betlabel, new GridBagConstraints(1, 3, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(coinSelectPanel, new GridBagConstraints(1, 4, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(betAmountPanel, new GridBagConstraints(1, 5, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+        coinFlipPanel.add(resultLabel, new GridBagConstraints(1, 6, 1, 1, 1, 0f, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
 
-        gbc.gridy = 1;
-        gbc.insets = new Insets(0, 0, 10, 0); //Add spacing between components
-        coinFlipPanel.add(coinSelectPanel, gbc);
 
-        gbc.gridy = 2;
-        gbc.insets = new Insets(0, 0, 10, 0); // Add spacing between components
-        coinFlipPanel.add(betAmountPanel, gbc);
-
-        gbc.gridy = 3;
-        coinFlipPanel.add(coinFlipBet, gbc);
-
-        // Add coinFlipPanel to the main panel
         add(coinFlipPanel);
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
     }
 
     // Utility method to create a customized button
