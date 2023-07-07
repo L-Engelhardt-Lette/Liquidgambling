@@ -3,7 +3,7 @@ Martha;44;password;1000;10;
 LutschMeinKogMa;22;password;1000;10;
 huan;22;sohn;1000;10;
 Chrisstinktimmer;45;deinemudda;1000;10;
-LEDEAdmin;20;qwertz;1000;10;
+LEDEAdmin;20;qwertz;1500;10;
 Admin;1;1234;1000;10;
 Username;Alter;Password;1000;10;
 Username;Alter;Password;1000;10;
