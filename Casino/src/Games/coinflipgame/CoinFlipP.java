@@ -1,5 +1,6 @@
 package Games.coinflipgame;
 
+import Backend.Zentrale;
 import frontend.extraUi.SettingUi;
 
 import javax.swing.*;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLOutput;
 import java.util.Random;
 
 public class CoinFlipP extends JPanel {
@@ -47,7 +47,7 @@ public class CoinFlipP extends JPanel {
                 String text = source.getText();
                 int i = Integer.parseInt(text);
                 betAmount += i;
-                betAmountLabel.setText("Im Pot: " + betAmount);
+                betlabel.setText("Im Pot: " + betAmount);
             }
         };
 
