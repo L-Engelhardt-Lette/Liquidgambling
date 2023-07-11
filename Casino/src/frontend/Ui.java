@@ -341,8 +341,8 @@ public class Ui {
 
     //Methode um den Pearlcount zu updaten
     public void update() {
-
-        startPearlCount.repaint();
+        DefaultListCellRenderer startPearlCount;
+        //startPearlCount.repaint();
 
     }
 
