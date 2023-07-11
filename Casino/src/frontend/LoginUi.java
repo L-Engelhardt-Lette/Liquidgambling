@@ -43,7 +43,7 @@ public class LoginUi {
 
 
     //Login einfabe Felder
-    JTextField loginUsername = new JTextField("LEDEAdmin");
+    JTextField loginUsername = new JTextField("Benutzername");
         loginUsername.setPreferredSize(new Dimension(300, 40));
         loginUsername.addMouseListener(new MouseAdapter() {
         @Override
@@ -51,7 +51,7 @@ public class LoginUi {
             loginUsername.setText("");
         }
     });
-    JTextField loginPassword = new JTextField("qwertz");
+    JTextField loginPassword = new JTextField("Passwort");
         loginPassword.setPreferredSize(new Dimension(300, 40));
         loginPassword.addMouseListener(new MouseAdapter() {
         @Override
