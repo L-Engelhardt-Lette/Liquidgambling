@@ -15,7 +15,8 @@ Backend:
 2. Mütter ficken
 3. Logout mit Funktionen versetzen
 4. Alles dokumentieren --> Kommentare usw.
-5. Lucas Arschloch liebhaben
+5. Nicks mom lieb haben 
+
 
 
 FÜR ALLE !:
